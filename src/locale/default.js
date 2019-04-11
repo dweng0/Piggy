@@ -6,6 +6,11 @@ export default {
     header: {
         greet: "Welcome",
         title: "piggy",
-        accountLinkLabel: "Accounts"
+        accountLinkLabel: "Accounts",
+        failedToConnect: "failed to connect to service"
+    },
+    noMatchedRoute: {
+        missing: "Looks like the page you are looking for is missing",
+        returnButton: "Go home"
     }
 }
