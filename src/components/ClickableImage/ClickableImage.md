@@ -1,10 +1,10 @@
 ```js
-<ClickableImage size="large" src="./src/logo.svg" link="/" />
+<ClickableImage size="small" src="./src/logo.svg" link="/" />
 ```
 
 You can add a custom props to an example wrapper:
 
-```jsx { "props": { "src": "./src/logo.svg" } }
+```jsx { "props": { "src": "./src/logo.svg" "size": "small" } }
 <ClickableImage src="./src/logo.svg" size="small" link="/" onClick={() => { alert('You clicked me!')}}/>
 
 ```
@@ -16,5 +16,5 @@ import { Image } from 'semantic-ui-react';
 
 
 ```html
-<a class="ui medium image" href="/"><img src="./src/logo.svg"/></a>
+<a class="ui small image " href="/"><img src="./src/logo.svg"/></a>
 ```

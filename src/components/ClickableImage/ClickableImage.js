@@ -7,7 +7,6 @@ import { Image } from 'semantic-ui-react';
  * @returns {class}
  */
 export default class ClickableImage extends React.Component {
-
     constructor(props) {
         super(props);
         let errors = [];
@@ -33,6 +32,7 @@ export default class ClickableImage extends React.Component {
                 as='a'
                 size={this.props.size}
                 href={this.props.link}
+                className='animated pulse'
             />
         );
     }

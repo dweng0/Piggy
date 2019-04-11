@@ -6,10 +6,10 @@
 
 In the project directory, you can run:
 
-### `npx styleguide` 
+### `npx styleguidist server` 
 Starts the styleguide dev server for piggy
 
-### `npx styleguide:build`
+### `npx styleguidist build`
 Produces a production level style guide 
 
 ### `npm start`
