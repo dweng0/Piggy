@@ -8,8 +8,13 @@ import Accounts from './screens/Accounts/Accounts';
 import Goals from './screens/Goals/Goals';
 import Details from './screens/Goals/Details';
 import Create from './screens/Goals/Create';
+import Header from './components/Header/Header';
 
 ReactDOM.render(
+    <div>
+        <div>
+            <Header />
+        </div>
         <BrowserRouter>
             <div>
                 <Route path="/" exact component={Splash} />
@@ -19,4 +24,5 @@ ReactDOM.render(
                 <Route path="/accounts/accountUid/goals/savingsGoalUid" component={Details} />
             </div>
         </BrowserRouter>
+    </div>
     , document.getElementById('root'));

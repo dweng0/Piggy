@@ -1,5 +1,6 @@
 import React from 'react';
 import { Image } from 'semantic-ui-react';
+import {Link} from 'react-router-dom'
 
 
 /**
@@ -25,15 +26,16 @@ export default class ClickableImage extends React.Component {
             throw new Error(errors.reduce((prev, current) => {return prev + ", " + current}));
         }
     }
+
+    /**
+     * Returns all the classes used by the image, including the size defined by the user
+     */
+    getClassForLink = () => {
+        return "ui image animated pulse " + this.props.size;
+    }
     render(){
         return (
-            <Image
-                src={this.props.src}
-                as='a'
-                size={this.props.size}
-                href={this.props.link}
-                className='animated pulse'
-            />
+        <Link className={this.getClassForLink()} to={this.props.link}><img src={this.props.src} /></Link>
         );
     }
 }

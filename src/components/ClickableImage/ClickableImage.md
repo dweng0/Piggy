@@ -1,17 +1,8 @@
-```js
-<ClickableImage size="small" src="./src/logo.svg" link="/" />
-```
-
-You can add a custom props to an example wrapper:
-
-```jsx { "props": { "src": "./src/logo.svg" "size": "small" } }
-<ClickableImage src="./src/logo.svg" size="small" link="/" onClick={() => { alert('You clicked me!')}}/>
-
-```
-
 ```jsx static
 import React from 'react';
-import { Image } from 'semantic-ui-react';
+
+//Note that as this depends on Links to work, it must have a Router as an ancestor
+ <ClickableImage src="./src/logo.svg" size="small" link="/" onClick={() => { alert('You clicked me!')}}/>
 ```
 
 

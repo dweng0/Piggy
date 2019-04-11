@@ -4,7 +4,7 @@ import { Button } from 'semantic-ui-react';
 /**
  * The Header component exists throughout the life time of the application and provides user details 
  */
-class Header extends React.Component {
+export default class Header extends React.Component {
     render(){
         return (
             <div>
@@ -14,5 +14,3 @@ class Header extends React.Component {
         );
     }
 }
-
-export default Header;
