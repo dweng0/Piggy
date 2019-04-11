@@ -1,5 +1,5 @@
 # Project Piggy!
-[View Project Progress](https://github.com/dweng0/Piggy/projects/1)
+[View Project Progress](https://github.com/dweng0/Piggy/projects/1) <br/>
 [View Documentation]()
 ![Super Pig](./src/logo.svg)
 ## Available Scripts
