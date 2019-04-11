@@ -1,48 +1,99 @@
+## Assumptions
+- Its ok for uids to be on the url
+
 ## Global components
 - header component "hey {user}"
 
+
 # User Journey
 
+router url: '/'
+
+- Splash component
+
 ## return account details -container
-Rest call `/api/v2/identity/individual` for header <--- "hey {user}" or somthing
+Rest call `/api/v2/identity/individual` for header <--- "hey {user}" or something
 
 Rest call: `/v1/accounts`
 returns array of accounts, grab all the accountUids and fetch the account details:
-Rest call: `/v1
-router url: `/`
+router url: `/accounts`
 
 - details component
 - List component
 
 user selects account
-selected account becomes `{accountUid}`
+selected account becomes `accountUid`
 
-## user selects
+user is routed to: `/accounts/accountUid/goals`
 
-## Return goals for selected account
+## user  account
 
-Rest call: `account/{accountUid}/savings-goals`
-router url: `/{accountUid}/goals`
+return goals for account
 
-list all goals 
+Rest call: `account/accountUid/savings-goals`
+router url: `/accounts/accountUid/goals`
+
+list all goals
 - details component
 - list component
 
-user selects a goal
-selected goal becomes `{savingsgoaluid}`
+select route: Branch 1
+create route: Branch 2
+## user selects a goal - Branch 1
 
+selected goal becomes `savingsgoaluid`
+Rest call: `/api/v2/account/accountUid/savings-goals/savingsGoalUid`
+router call: `/accounts/accountUid/goals/savingsGoalUid`
 
+display goal details
+ (stretch) --> graph js?
 
+ -details component
+ -graph component (stretch)
 
+ ## user creates a goal - Branch 2
 
+Router call: `/accounts/accountUid/goals/create`
+Rest call: `/api/v2/account/accountUid/` < --- PUT request (why?), check the body in docs to see what to send
 
-account id now = {accountUid}
+ - details component
+ - form component
 
-list all savings goals... u
-/api/v2/account/{accountUid}/savings-goals
+user it taken to their list of goals:
 
+router url: `/accounts/accountUid/goals`
 
-list savings goals
-get savings goals
-list them
-if none, create saving goal
+## user selects round up
+
+Confirmation of round up of money into goal
+
+1 (round up algorithm)
+2 confirm round up
+3 PUT amount to goal
+4 success
+5 success button takes user back to list of goals: `/accounts/accountUid/goals`
+
+-confirmation component
+- success component (like splash, but happier)
+user confirms:
+
+# Defined Components
+
+- Splash
+- Header
+- Details
+- List (and ListItem)
+- Form
+- Confirm
+- Success
+
+# Defined Component Containers
+
+- Home `/`
+- Accounts `/accounts`
+- Goals `/account/accountUid/goals` <-- needs param {accountUid}
+- CreateGoal `/accounts/accountUid/goals/create` <--- needs param {accountUid}
+- GoalDetails `/account/accountUid/goals/savingsGoalUid` <--- needs param {accountUid}, {savingGoalUid}
+- Roundup `/account/accountUid/goals/savingsGoalUid/roundup` <--- needs param {accountUid}, {savingGoalUid}
+- Confirm `/account/accountUid/goals/savingsGoalUid/roundup` <--- needs param {accountUid}, {savingGoalUid}
+- success `/account/accountUid/goals/savingsGoalUid/roundup`  <--- needs param {accountUid}, {savingGoalUid}
