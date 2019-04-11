@@ -2,6 +2,8 @@
 [View Project Progress](https://github.com/dweng0/Piggy/projects/1) <br/>
 [View Documentation]()
 ![Super Pig](./src/logo.svg)
+
+All images source from the open source website [pixabay](https://pixabay.com)
 ## Available Scripts
 
 In the project directory, you can run:

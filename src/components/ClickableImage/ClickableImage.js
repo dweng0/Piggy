@@ -1,10 +1,6 @@
 import React from 'react';
-import { Image } from 'semantic-ui-react';
-import {Link} from 'react-router-dom'
-
-
 /**
- * Clickable image component used by Splash and success to provide a clickable image
+ * Clickable image component for application
  * @returns {class}
  */
 export default class ClickableImage extends React.Component {
@@ -26,16 +22,12 @@ export default class ClickableImage extends React.Component {
             throw new Error(errors.reduce((prev, current) => {return prev + ", " + current}));
         }
     }
-
-    /**
-     * Returns all the classes used by the image, including the size defined by the user
-     */
-    getClassForLink = () => {
-        return "ui image animated pulse " + this.props.size;
+    getCss = () => {
+        return "animated pulse ui image " + this.props.className + " " + this.props.size;
     }
     render(){
         return (
-        <Link className={this.getClassForLink()} to={this.props.link}><img src={this.props.src} /></Link>
+            <img alt="" src={this.props.src} className={this.getCss()} />
         );
     }
 }

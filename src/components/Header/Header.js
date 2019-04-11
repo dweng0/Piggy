@@ -1,16 +1,14 @@
 import React from 'react';
-import { Button } from 'semantic-ui-react';
+import content from '../../locale/default';
 
+const headerContent = content.header;
 /**
  * The Header component exists throughout the life time of the application and provides user details 
  */
 export default class Header extends React.Component {
     render(){
         return (
-            <div>
-                <Button primary>Primary</Button>
-                <Button secondary>Secondary</Button>
-            </div>
+            <div>{headerContent.greet}</div>
         );
     }
 }
