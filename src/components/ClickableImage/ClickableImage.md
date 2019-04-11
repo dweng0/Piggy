@@ -11,7 +11,6 @@ You can add a custom props to an example wrapper:
 
 ```jsx static
 import React from 'react';
-import { Image } from 'semantic-ui-react';
 ```
 
 

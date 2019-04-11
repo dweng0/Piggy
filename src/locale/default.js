@@ -4,6 +4,8 @@ export default {
         subTitle: "Start saving"
     },
     header: {
-        greet: "Welcome"
+        greet: "Welcome",
+        title: "piggy",
+        accountLinkLabel: "Accounts"
     }
 }

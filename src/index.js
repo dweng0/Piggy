@@ -12,11 +12,9 @@ import Header from './components/Header/Header';
 
 ReactDOM.render(
     <div>
-        <div>
-            <Header />
-        </div>
         <BrowserRouter>
             <div>
+                <Header />
                 <Route path="/" exact component={Splash} />
                 <Route path="/accounts" exact component={Accounts} />
                 <Route path="/accounts/accountUid/goals" component={Goals} />
