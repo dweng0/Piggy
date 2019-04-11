@@ -1,12 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
+
 import './index.css';
+
 import Splash from './screens/Splash/Splash';
-import * as serviceWorker from './serviceWorker';
+import Accounts from './screens/Accounts/Accounts';
+import Goals from './screens/Goals/Goals';
+import Details from './screens/Goals/Details';
+import Create from './screens/Goals/Create';
 
-ReactDOM.render(<Splash />, document.getElementById('root'));
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+ReactDOM.render(
+        <BrowserRouter>
+            <div>
+                <Route path="/" exact component={Splash} />
+                <Route path="/accounts" exact component={Accounts} />
+                <Route path="/accounts/accountUid/goals" component={Goals} />
+                <Route path="/accounts/accountUid/goals/create" exact component={Create} />
+                <Route path="/accounts/accountUid/goals/savingsGoalUid" component={Details} />
+            </div>
+        </BrowserRouter>
+    , document.getElementById('root'));
