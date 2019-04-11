@@ -5,7 +5,7 @@ import content from '../../locale/default';
 //"api/v2/account-holder/individual
 const headerContent = content.header;
 /**
- * The Header component exists throughout the life time of the application and provides user details 
+ * The Header component exists throughout the life time of the application and provides user details
  */
 export default class Header extends React.Component {
     state = {
@@ -39,18 +39,18 @@ export default class Header extends React.Component {
     setUserNameOrError = () => {
         if(this.state.errorMessage)
         {
-            return <div>{headerContent.failedToConnect}</div>
+            return <a className="item"><i className="exclamation circle icon"></i>{headerContent.failedToConnect}</a>
         }
         else if(this.state.loadingName)
         {
             return (
-                <div class="small ui active inline loader"></div>
+                <div className="small ui active inline loader"></div>
             );
-        }        
+        }
         else
         {
            return (
-            <a class="ui blue image label">
+            <a className="ui blue image label">
                 <img src="/images/avatar/small/veronika.jpg"/>
                 {this.props.name}
             </a>
@@ -62,9 +62,7 @@ export default class Header extends React.Component {
             <div className="ui secondary pointing menu">
                 <Link to="/" className="item">{headerContent.title}</Link>
                 <div className="right menu">
-                    <div className="item">
-                        {this.setUserNameOrError()}
-                    </div>
+                    {this.setUserNameOrError()}
                     <Link to="/accounts" className="item">
                         {headerContent.accountLinkLabel}
                     </Link>

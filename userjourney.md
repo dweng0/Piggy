@@ -1,6 +1,7 @@
 ## Assumptions
 - Its ok for uids to be on the url
 
+
 ## Global components
 - header component "hey {user}"
 

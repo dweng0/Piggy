@@ -19,7 +19,7 @@ export default class ClickableImage extends React.Component {
         }
     }
     getCss = () => {
-        return "animated pulse ui image " + this.props.className + " " + this.props.size;
+        return "ui image " + this.props.className + " " + this.props.size;
     }
     render(){
         return (

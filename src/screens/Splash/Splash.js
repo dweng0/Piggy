@@ -15,7 +15,7 @@ export default class Splash extends Component {
         <header className="App-header">
         <h1 className="white text center" style={{marginTop:'20px'}}>{splashContent.welcome}</h1>
           <Link to="/accounts">
-            <ClickableImage src={logo} size="large" className="circular"/>
+            <ClickableImage src={logo} size="large" className="animated pulse"/>
             <button className="massive blue ui button">{splashContent.subTitle}</button>
           </Link>
         </header>
