@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+
 import starlingRestInterface from '../../serviceprovider/starlingbank/interface';
 import content from '../../locale/default';
+
+import Login from '../Login/login';
 
 const headerContent = content.header;
 /**
@@ -59,9 +62,10 @@ export default class Header extends React.Component {
     render(){
         return (
             <div className="ui secondary pointing menu">
+              
                 <Link to="/" className="item">{headerContent.title}</Link>
                 <div className="right menu">
-                    {this.setUserNameOrError()}
+                    <Login/>             
                     <Link to="/accounts" className="item">
                         {headerContent.accountLinkLabel}
                     </Link>

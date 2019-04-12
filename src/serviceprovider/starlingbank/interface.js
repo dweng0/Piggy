@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { token } from '../../constants/starlingConstants'; //oAUTH not implemented.....
+import { oAuthConfig, oathServiceUrl } from '../../constants/starlingConstants';
 
 /**
  * Provide a strict interface to Starling APIs.
@@ -40,10 +41,18 @@ const starling = (version) => {
 
             const url = baseUrl + gettableUrlEndPoints[endPoint];
             return axios.get(url, {
-                header: {
-                    "Accept": "application/json",
-                    "Content-Type": "application/json",
+                headers: {
                     "Authorization": "Bearer UaAPFFPjA43GUVuXoWS50Vozu57ngtUAGzSAsWWyrhTdey3XbXZSF1Y8s6519bri"
+                }
+            });
+        },
+        authorize: (params) => {
+            return axios.post(oathServiceUrl, {
+                headers: {
+                    "grant_type":"authorization_code",
+                    "code": oAuthConfig.code,
+                    "redirect_uri": oAuthConfig.redirect_uri,
+                    "client_id": oAuthConfig.client_id
                 }
             });
         }
