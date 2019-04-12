@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import starling from '../../serviceprovider/starlingbank/interface';
+import starlingRestInterface from '../../serviceprovider/starlingbank/interface';
 import content from '../../locale/default';
 
 const headerContent = content.header;
@@ -26,7 +26,7 @@ export default class Header extends React.Component {
             this.props.name = response.firstName + ' ' + response.lastName;
             this.setState({loadingName: false});
         }
-        starling('v1')
+        starlingRestInterface('v2')
             .fetch('account-holder/individual')
             .then(onSuccess)
             .catch(onError)

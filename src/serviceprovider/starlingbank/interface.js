@@ -1,5 +1,5 @@
 import axios from 'axios';
-import token from '../../constants/token'; //oAUTH not implemented.....
+import { token } from '../../constants/starlingConstants'; //oAUTH not implemented.....
 
 /**
  * Provide a strict interface to Starling APIs.
@@ -29,7 +29,6 @@ const starling = (version) => {
 
     const gettableUrlEndPoints = {
         customers: "customers",
-
     };
     gettableUrlEndPoints['account-holder/individual'] = 'transactions' //'account-holder/individual';
 
@@ -41,11 +40,11 @@ const starling = (version) => {
 
             const url = baseUrl + gettableUrlEndPoints[endPoint];
             return axios.get(url, {
-                headers: {
-                    Accept: 'application/json',
-                    Authorization: 'Bearer ' + token
-                },
-                withCredentials: true
+                header: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer UaAPFFPjA43GUVuXoWS50Vozu57ngtUAGzSAsWWyrhTdey3XbXZSF1Y8s6519bri"
+                }
             });
         }
     }

@@ -29,24 +29,29 @@ const List = (props) => {
     const renderItems = (items) => {
         return (
             items.forEach((item) => {
-                <div className="item">
-                    {getImage(props.randomImage)}
-                    <div className="content">
-                        <div className="header">{item.title}</div>
-                        {item.content}
+                return (
+                    <div className="item">
+                        {getImage(props.randomImage)}
+                        <div className="content">
+                            <div className="header">{item.title}</div>
+                            {item.content}
+                        </div>
                     </div>
-                </div>
+                );
+                
             })
         );
     }
-
-    <div className="ui two column centered grid">
-        <div className="column">
-            <div className="ui middle aligned animated list">
-                {renderItems(props.items)}
+    return (
+        <div className="ui two column centered grid">
+            <div className="column">
+                <div className="ui middle aligned animated list">
+                    {renderItems(props.items)}
+                </div>
             </div>
         </div>
-    </div>
+    );
+    
 }
 
 export default List;
