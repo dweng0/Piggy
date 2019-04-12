@@ -1,11 +1,11 @@
 ```js
-<Details size="small" src="../../assets/images/accounts.svg" link="/" />
+ <Details cardImage="../../assets/images/accounts.svg" title="welcome to the details" content="This is adetails sub engagement area" />
 ```
 
 You can add a custom props to an example wrapper:
 
-```jsx { "props": { "src": "../../assets/images/accounts.svg", "size": "small", "className": "propogate additional classNames if required"  } }
-<Details src="../../assets/images/accounts.svg" size="small" link="/"/>
+```jsx { "props": { "cardImage": "../../assets/images/accounts.svg", "title": "im a title", "content": "Im a content area"  } }
+<Details cardImage={props.cardImage} title={props.title} content={props.content}/>
 
 ```
 
