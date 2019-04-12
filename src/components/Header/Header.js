@@ -26,7 +26,7 @@ export default class Header extends React.Component {
             this.props.name = response.firstName + ' ' + response.lastName;
             this.setState({loadingName: false});
         }
-        starling('v2')
+        starling('v1')
             .fetch('account-holder/individual')
             .then(onSuccess)
             .catch(onError)

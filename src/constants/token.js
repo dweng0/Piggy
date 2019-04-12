@@ -1,4 +1,4 @@
 //For testing pusposes, Oauth not implemented
 export default {
-    token: "jPplY3lnov2RcEJqf4DZbC4VhRJDgdWlKcw90unj4YmdPWahBbrtdFwGPcvBX1ey"
+    token: "iTEiu9iJ1ZVVaAa8an05pFLcGXAnXhfEh4GPFEmEohy62VC4PaT4VU6qLD18ra35"
 };

@@ -2,9 +2,10 @@ import axios from 'axios';
 import token from '../../constants/token'; //oAUTH not implemented.....
 
 /**
- * Provide a strict interface to Starling APIs. 
- 
- * @param {api version} version 
+ * Provide a strict interface to Starling APIs.
+ * as per spec, does not use oAuth
+
+ * @param {api version} version
  * @returns {Object} an object with function calls that return promises when called
  * @example starling('v1').fetch('customers').then(() => {alert('done!')})
  */
@@ -30,7 +31,7 @@ const starling = (version) => {
         customers: "customers",
 
     };
-    gettableUrlEndPoints['account-holder/individual'] = 'account-holder/individual';
+    gettableUrlEndPoints['account-holder/individual'] = 'transactions' //'account-holder/individual';
 
 
     return {
@@ -41,6 +42,7 @@ const starling = (version) => {
             const url = baseUrl + gettableUrlEndPoints[endPoint];
             return axios.get(url, {
                 headers: {
+                    Accept: 'application/json',
                     Authorization: 'Bearer ' + token
                 },
                 withCredentials: true
