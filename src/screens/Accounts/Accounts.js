@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import ClickableImage from '../../components/ClickableImage/ClickableImage';
-import cardImage from '../../assets/images/accounts.svg'
+import Details from '../../components/Details/Details';
+import Image from '../../components/Image/Image';
+import cardImage from '../../assets/images/accounts.svg';
+
+const accountContent = {
+    title: "Your accounts",
+    content: "You're only a few steps away from stashing away that loose change"
+}
 //https://tylermcginnis.com/react-router-url-parameters/
 export default class Accounts extends Component {
   state = {
@@ -11,35 +17,25 @@ export default class Accounts extends Component {
   render() {
     return (
       <div>
-        <div className="ui">
-             <ClickableImage src={cardImage} size="small" className="centered"/>
-        </div>
-        <h2 className="ui icon center aligned header">
-          <div className="content">Your Accounts</div>
-        </h2>
-        <div className="ui two column centered grid">
-            <div className="ui center aligned">
-                <p className="center aligned">You're only a few steps away from stashing away that loose change</p>
-            </div>
-        </div>
+        <Details cardImage={cardImage} title={accountContent.title} content={accountContent.content} />
                 <div className="ui two column centered grid">
                     <div className="column">
                     <div className="ui middle aligned animated list">
                     <div className="item">
-                        <ClickableImage src={cardImage} size="" className="avatar"/>
+                        <Image src={cardImage} size="" className="avatar"/>
 
                         <div className="content">
                         <div className="header">Current Account</div>
                         </div>
                     </div>
                     <div className="item">
-                        <ClickableImage src={cardImage} size="" className="avatar"/>
+                        <Image src={cardImage} size="" className="avatar"/>
                         <div className="content">
                         <div className="header">Savings Account</div>
                         </div>
                     </div>
                     <div className="item">
-                        <ClickableImage src={cardImage} size="" className="avatar"/>
+                        <Image src={cardImage} size="" className="avatar"/>
                         <div className="content">
                         <div className="header">ISA</div>
                         </div>

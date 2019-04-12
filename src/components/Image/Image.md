@@ -1,11 +1,11 @@
 ```js
-<ClickableImage size="small" src="./src/logo.svg" link="/" />
+<Image size="small" src="./src/logo.svg" link="/" />
 ```
 
 You can add a custom props to an example wrapper:
 
 ```jsx { "props": { "src": "./src/logo.svg", "size": "small", "className": "propogate additional classNames if required"  } }
-<ClickableImage src="./src/logo.svg" size="small" link="/"/>
+<Image src="./src/logo.svg" size="small" link="/"/>
 
 ```
 

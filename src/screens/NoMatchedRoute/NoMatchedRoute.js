@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import ClickableImage from '../../components/ClickableImage/ClickableImage';
+import Image from '../../components/Image/Image';
 
 import image from '../../assets/images/404.svg';
 import content from '../../locale/default';
@@ -14,7 +14,7 @@ const NoMatchedRoute = (props) => {
         <header className="App-header">
         <h1 className="white text center" style={{marginTop:'20px'}}>404</h1>
            
-                <ClickableImage src={image} size="medium" className="circular"/>
+                <Image src={image} size="medium" className="circular"/>
                 <p>{notFoundContent.missing}</p>
                 <Link to="/">
                     <button className="massive blue ui button">{notFoundContent.returnButton}</button>

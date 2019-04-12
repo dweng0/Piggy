@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, Redirect } from 'react-router-dom'
 import starling from '../../serviceprovider/starlingbank/interface';
 import content from '../../locale/default';
-//"api/v2/account-holder/individual
+
 const headerContent = content.header;
 /**
  * The Header component exists throughout the life time of the application and provides user details
@@ -17,7 +17,6 @@ export default class Header extends React.Component {
         super(props);
 
         const onError = (error) => {
-            debugger;
             this.setState({errorMessage: error.message});
         }
 

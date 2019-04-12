@@ -3,7 +3,7 @@ import React from 'react';
  * Clickable image component for application
  * @returns {class}
  */
-export default class ClickableImage extends React.Component {
+export default class Image extends React.Component {
     constructor(props) {
         super(props);
         let errors = [];
