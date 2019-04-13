@@ -45,24 +45,31 @@ class Header extends React.Component {
         }
     }
 
-    async componentDidMount() {
-        const response = await starling().identify();
-        console.log(response.status);
-        if(response.status === 200)
-        {
-            this.setState({ 
-                name: response.data.firstName + ' ' + response.data.lastName,
-                loadingName: false
-            }) 
-        }
-        else
-        {
-            this.setState({errors: true});
-        }
+    componentDidMount() {
+        starling().identify()
+                .then((response) => {
+                    if(response.status === 200)
+                    {  alert(1);
+                        this.setState({
+                            name: response.data.firstName + ' ' + response.data.lastName,
+                            loadingName: false
+                        })
+                    }
+                    else
+                    {
+                        this.setState({errors: true});
+                    }
+                })
+                .catch((error) => {
+                      this.setState({
+                          errors: true,
+                          errorMessage: error.message
+                      });
+                });
     }
     render(){
         return (
-            <div className="ui secondary pointing menu">                
+            <div className="ui secondary pointing menu">
                 <Link to="/" className="item">{headerContent.title}</Link>
                 <div className="right menu">
                     {this.setUserNameOrError()}

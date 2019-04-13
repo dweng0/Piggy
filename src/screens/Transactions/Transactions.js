@@ -31,12 +31,12 @@ class Transactions extends Component {
     }
 
     /**
-     * grab amount spent, turn it into a positive number, 
+     * grab amount spent, turn it into a positive number,
      * per reduce call:
      * round up
      * round up - amount spent
      * Ensure type correction
-     * 
+     *
      * save a label version as localestring (would need to pass in the second option using i18)
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString#Browser_Compatibility
      */
@@ -52,35 +52,42 @@ class Transactions extends Component {
         this.props.roundUpAmountCalculated({ amount: savings, label: savingsLabel });
     }
 
-    async componentDidMount() {      
-        const response = await starling().transactions(this.state.from, this.state.to);
-
-        if(response.status === 200)
-        {
-            //only outbound transactions please
-            this.setState({ 
-                transactions: _.filter(response.data._embedded.transactions, transaction => { return transaction.direction === "OUTBOUND" }),
-                loading: false
+    componentDidMount() {
+        starling().transactions(this.state.from, this.state.to)
+            .then((response) => {
+                if(response.status === 200)
+                {
+                    //only outbound transactions please
+                    this.setState({
+                        transactions: _.filter(response.data._embedded.transactions, transaction => { return transaction.direction === "OUTBOUND" }),
+                        loading: false
+                    });
+                    this.calculateSavings();
+                }
+                else
+                {
+                    this.setState({
+                        errors: true,
+                        loading: false
+                    });
+                }
+            })
+            .catch(() => {
+                this.setState({
+                    errors: true,
+                    loading: false
+                });
             });
-            this.calculateSavings();
-        }
-        else
-        {
-            this.setState({
-                errors: true,
-                loading: false
-            });
-        }
     }
 
     getDetails = () => {
-        
+        debugger;
         let content = transactionsText.contentinitial;
         if(this.state.errors)
         {
             content = transactionsText.contentFailed;
         }
-        if(!this.state.loading)
+        if(!this.state.loading && !this.state.errors)
         {
             if(this.state.transactions.length > 0)
             {
@@ -91,12 +98,11 @@ class Transactions extends Component {
             {
                 content = "There were no transactions that we could find this week";
             }
-            
-        }        
+        }
         return <Details cardImage={cardImage} title={transactionsText.title} content={content} />;
     }
 
-    getSegmentContent = () => {        
+    getSegmentContent = () => {
         if (this.state.loading)
         {
             return <Loading/>
