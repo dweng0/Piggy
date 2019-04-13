@@ -2,6 +2,20 @@ import axios from 'axios';
 import { token } from '../../constants/starlingConstants'; //oAUTH not implemented.....
 import { oAuthConfig, oathServiceUrl } from '../../constants/starlingConstants';
 
+
+class StarlingService {
+    options = {
+        version: 'v1'
+    }
+
+    constructor(options) {
+        if(!options.serviceUrl)
+        {
+            throw new Error('service URL is missing');
+        }
+    }
+    
+}
 /**
  * Provide a strict interface to Starling APIs.
  * as per spec, does not use oAuth
@@ -38,11 +52,14 @@ const starling = (version) => {
         fetch: (endPoint) => {
             //will assert that it doesn't exist, but try anyway.
             console.assert(gettableUrlEndPoints[endPoint], "url end point not found " + endPoint );
-
+            const accessToken = 'Mz771awWpCZfDbBGR99MYc81RSNXvnG0wbBUN4faJ5tigdnBxe0NpBKpdj0iXeKF';
             const url = baseUrl + gettableUrlEndPoints[endPoint];
+            return axios({method: 'get', url: url, headers: {
+                'Authorization': 'Bearer ' +accessToken
+            }});
             return axios.get(url, {
-                headers: {
-                    "Authorization": "Bearer UaAPFFPjA43GUVuXoWS50Vozu57ngtUAGzSAsWWyrhTdey3XbXZSF1Y8s6519bri"
+                headers:{
+                    'Authorization': 'Bearer Mz771awWpCZfDbBGR99MYc81RSNXvnG0wbBUN4faJ5tigdnBxe0NpBKpdj0iXeKF'
                 }
             });
         },

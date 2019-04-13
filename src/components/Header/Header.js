@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom'
 import starlingRestInterface from '../../serviceprovider/starlingbank/interface';
 import content from '../../locale/default';
 
-import Login from '../Login/login';
-
 const headerContent = content.header;
 /**
  * The Header component exists throughout the life time of the application and provides user details
@@ -29,7 +27,7 @@ export default class Header extends React.Component {
             this.props.name = response.firstName + ' ' + response.lastName;
             this.setState({loadingName: false});
         }
-        starlingRestInterface('v2')
+        starlingRestInterface('v1')
             .fetch('account-holder/individual')
             .then(onSuccess)
             .catch(onError)
@@ -61,13 +59,14 @@ export default class Header extends React.Component {
     }
     render(){
         return (
-            <div className="ui secondary pointing menu">
-              
+            <div className="ui secondary pointing menu">                
                 <Link to="/" className="item">{headerContent.title}</Link>
                 <div className="right menu">
-                    <Login/>             
+                    {this.setUserNameOrError()}
                     <Link to="/accounts" className="item">
-                        {headerContent.accountLinkLabel}
+                        <button className="small teal ui button">
+                            {headerContent.accountLinkLabel}
+                        </button>
                     </Link>
                 </div>
             </div>

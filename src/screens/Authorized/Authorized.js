@@ -6,7 +6,6 @@ export default class Authorised {
     }
 
     componentDidMount = () => {
-        debugger;
     }
 
     render(){
