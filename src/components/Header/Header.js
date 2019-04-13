@@ -16,10 +16,10 @@ class Header extends React.Component {
         errors: false
     }
 
-    /**
-     * Basically handle all the different states while we wait for a response
-     */
-    setUserNameOrError = () => {
+    /*
+    * Set the name content area based on state
+    */
+    setNameContentArea = () => {
         if(this.state.errors)
         {
             return <a className="item"><i className="exclamation circle icon"></i>{headerContent.failedToConnect}</a>
@@ -45,11 +45,14 @@ class Header extends React.Component {
         }
     }
 
+    /**
+    * Identify user by calling the api wrapper
+    */
     componentDidMount() {
         starling().identify()
                 .then((response) => {
                     if(response.status === 200)
-                    {  alert(1);
+                    {
                         this.setState({
                             name: response.data.firstName + ' ' + response.data.lastName,
                             loadingName: false
@@ -72,7 +75,7 @@ class Header extends React.Component {
             <div className="ui secondary pointing menu">
                 <Link to="/" className="item">{headerContent.title}</Link>
                 <div className="right menu">
-                    {this.setUserNameOrError()}
+                    {this.setNameContentArea()}
                 </div>
             </div>
         );
@@ -80,8 +83,6 @@ class Header extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state);
-    //amount: state.
     return state;
 }
 

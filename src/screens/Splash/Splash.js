@@ -7,6 +7,10 @@ import Image from '../../components/Image/Image';
 import content from '../../locale/default';
 
 const splashContent = content.splash;
+
+/**
+*  Home screen
+*/
 export default class Splash extends Component {
   render() {
     return (
