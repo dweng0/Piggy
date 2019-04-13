@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 
-import starlingRestInterface from '../../serviceprovider/starlingbank/interface';
 import content from '../../locale/default';
-import axios from 'axios';
+import starling from '../../serviceprovider/starlingbank/interface';
 
 const headerContent = content.header;
 /**
@@ -12,40 +11,19 @@ const headerContent = content.header;
 export default class Header extends React.Component {
     state = {
         loadingName:true,
-        errorMessage: ""
+        errorMessage: "",
+        errors: false
     }
 
     constructor(props) {
         super(props);
-
-        const onError = (error) => {
-            this.setState({errorMessage: error.message});
-        }
-
-        const onSuccess = (response) => {
-            if(response.status = 200)
-            //response.data.results
-            this.props.name = response.firstName + ' ' + response.lastName;
-            this.setState({loadingName: false});
-        }
-        axios.get('/api/v1/transactions', {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization' : 'Bearer Mz771awWpCZfDbBGR99MYc81RSNXvnG0wbBUN4faJ5tigdnBxe0NpBKpdj0iXeKF'
-              },
-              withCredentials: true,
-              
-              
-        })
-            .then(onSuccess)
-            .catch(onError)
     }
 
     /**
      * Basically handle all the different states while we wait for a response
      */
     setUserNameOrError = () => {
-        if(this.state.errorMessage)
+        if(this.state.errors)
         {
             return <a className="item"><i className="exclamation circle icon"></i>{headerContent.failedToConnect}</a>
         }
@@ -58,11 +36,23 @@ export default class Header extends React.Component {
         else
         {
            return (
-            <a className="ui blue image label">
-                <img src="/images/avatar/small/veronika.jpg"/>
-                {this.props.name}
-            </a>
+            <a className="item" href="/">Hey {this.state.name}</a>
            );
+        }
+    }
+
+    async componentDidMount() {
+        const response = await starling().identify();
+        if(response.status === 200)
+        {
+            this.setState({ 
+                name: response.data.firstName + ' ' + response.data.lastName,
+                loadingName: false
+            }) 
+        }
+        else
+        {
+            this.setState({errors: true});
         }
     }
     render(){

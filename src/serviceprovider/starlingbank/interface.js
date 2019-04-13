@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import { accessToken } from '../../constants/starlingConstants'
 
 /**
  * Provide a strict interface to Starling APIs.
@@ -9,41 +9,17 @@ import axios from 'axios';
  * @returns {Object} an object with function calls that return promises when called
  * @example starling('v1').fetch('customers').then(() => {alert('done!')})
  */
-const starling = (version) => {
-    let errors = [];
-    if(!version)
-    {
-        errors.push("A version is required");
-    }
-    
-
-    if(errors.length > 0)
-    {
-        throw new Error(errors.reduce((prev, current) => {return prev + ", " + current}));
-    }
-
-    const baseUrl = "https://api-sandbox.starlingbank.com/api/" + version + "/";
-
-    const gettableUrlEndPoints = {
-        customers: "customers",
-    };
-    gettableUrlEndPoints['account-holder/individual'] = 'transactions' //'account-holder/individual';
-
-
+const starling = () => {
+    const apiPath = '/api';
     return {
-        fetch: (endPoint) => {
-            //will assert that it doesn't exist, but try anyway.
-            console.assert(gettableUrlEndPoints[endPoint], "url end point not found " + endPoint );
-            const accessToken = 'Mz771awWpCZfDbBGR99MYc81RSNXvnG0wbBUN4faJ5tigdnBxe0NpBKpdj0iXeKF';
-            const url = baseUrl + gettableUrlEndPoints[endPoint];
-            return axios({method: 'get', url: url, headers: {
-                'Authorization': 'Bearer ' +accessToken
-            }});
-            return axios.get(url, {
-                headers:{
-                    'Authorization': 'Bearer Mz771awWpCZfDbBGR99MYc81RSNXvnG0wbBUN4faJ5tigdnBxe0NpBKpdj0iXeKF'
-                }
-            });
+        identify: () => {
+           return axios.get(apiPath +'/v2/account-holder/individual', {            
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization' : 'Bearer ' + accessToken
+                  },
+                  withCredentials: true,
+            })
         }
     }
 }
