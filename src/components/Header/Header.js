@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 import starlingRestInterface from '../../serviceprovider/starlingbank/interface';
 import content from '../../locale/default';
+import axios from 'axios';
 
 const headerContent = content.header;
 /**
@@ -27,8 +28,15 @@ export default class Header extends React.Component {
             this.props.name = response.firstName + ' ' + response.lastName;
             this.setState({loadingName: false});
         }
-        starlingRestInterface('v1')
-            .fetch('account-holder/individual')
+        axios.get('/api/v1/transactions', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization' : 'Bearer Mz771awWpCZfDbBGR99MYc81RSNXvnG0wbBUN4faJ5tigdnBxe0NpBKpdj0iXeKF'
+              },
+              withCredentials: true,
+              
+              
+        })
             .then(onSuccess)
             .catch(onError)
     }

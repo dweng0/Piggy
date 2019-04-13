@@ -1,21 +1,6 @@
 import axios from 'axios';
-import { token } from '../../constants/starlingConstants'; //oAUTH not implemented.....
-import { oAuthConfig, oathServiceUrl } from '../../constants/starlingConstants';
 
 
-class StarlingService {
-    options = {
-        version: 'v1'
-    }
-
-    constructor(options) {
-        if(!options.serviceUrl)
-        {
-            throw new Error('service URL is missing');
-        }
-    }
-    
-}
 /**
  * Provide a strict interface to Starling APIs.
  * as per spec, does not use oAuth
@@ -30,10 +15,7 @@ const starling = (version) => {
     {
         errors.push("A version is required");
     }
-    if(!token)
-    {
-        errors.push("An auth token is required");
-    }
+    
 
     if(errors.length > 0)
     {
@@ -60,16 +42,6 @@ const starling = (version) => {
             return axios.get(url, {
                 headers:{
                     'Authorization': 'Bearer Mz771awWpCZfDbBGR99MYc81RSNXvnG0wbBUN4faJ5tigdnBxe0NpBKpdj0iXeKF'
-                }
-            });
-        },
-        authorize: (params) => {
-            return axios.post(oathServiceUrl, {
-                headers: {
-                    "grant_type":"authorization_code",
-                    "code": oAuthConfig.code,
-                    "redirect_uri": oAuthConfig.redirect_uri,
-                    "client_id": oAuthConfig.client_id
                 }
             });
         }
