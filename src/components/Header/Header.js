@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux';
 
 import content from '../../locale/default';
 import starling from '../../serviceprovider/starlingbank/interface';
@@ -8,7 +9,7 @@ const headerContent = content.header;
 /**
  * The Header component exists throughout the life time of the application and provides user details
  */
-export default class Header extends React.Component {
+class Header extends React.Component {
     state = {
         loadingName:true,
         errorMessage: "",
@@ -33,14 +34,20 @@ export default class Header extends React.Component {
         }
         else
         {
+            let wording = `Hey ${this.state.name}`;
+            if(this.props.saving)
+            {
+                wording += `, lets save ${this.props.saving.label}`;
+            }
            return (
-            <a className="item" href="/">Hey {this.state.name}</a>
+            <a className="item" href="/">{wording}</a>
            );
         }
     }
 
     async componentDidMount() {
         const response = await starling().identify();
+        console.log(response.status);
         if(response.status === 200)
         {
             this.setState({ 
@@ -59,13 +66,16 @@ export default class Header extends React.Component {
                 <Link to="/" className="item">{headerContent.title}</Link>
                 <div className="right menu">
                     {this.setUserNameOrError()}
-                    <Link to="/accounts" className="item">
-                        <button className="small teal ui button">
-                            {headerContent.accountLinkLabel}
-                        </button>
-                    </Link>
                 </div>
             </div>
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    console.log(state);
+    //amount: state.
+    return state;
+}
+
+export default connect(mapStateToProps)(Header);

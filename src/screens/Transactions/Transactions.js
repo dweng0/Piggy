@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import _ from 'underscore';
 
+import { roundUpAmountCalculated } from '../../actions';
 import Details from '../../components/Details/Details';
 import cardImage from '../../assets/images/weekly.png';
 import content from '../../locale/default';
@@ -11,7 +13,7 @@ import starling from '../../serviceprovider/starlingbank/interface';
 
 const transactionsText = content.transactionsText;
 
-export default class Accounts extends Component {
+class Transactions extends Component {
 
     state = {
         loading: true,
@@ -47,6 +49,7 @@ export default class Accounts extends Component {
 
         const savingsLabel =  (savings).toLocaleString("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2})
         this.setState({savings, savingsLabel});
+        this.props.roundUpAmountCalculated({ amount: savings, label: savingsLabel });
     }
 
     async componentDidMount() {      
@@ -139,3 +142,11 @@ export default class Accounts extends Component {
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+
+    }
+}
+
+export default connect(mapStateToProps, { roundUpAmountCalculated })(Transactions);

@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
 import Splash from './screens/Splash/Splash';
 import Accounts from './screens/Accounts/Accounts';
@@ -11,12 +13,13 @@ import Header from './components/Header/Header';
 import NoService from './screens/NoService/NoService'
 import NoMatchedRoute from './screens/NoMatchedRoute/NoMatchedRoute';
 import Transactions from './screens/Transactions/Transactions';
+import reducers from './reducers';
 
 import './index.css';
 
 ReactDOM.render(
-    <div>
-        <BrowserRouter>
+    <Provider store={ createStore(reducers) }> 
+         <BrowserRouter>
             <div>
                 <Header />
                 <Switch>
@@ -31,5 +34,5 @@ ReactDOM.render(
                 </Switch>
             </div>
         </BrowserRouter>
-    </div>
+    </Provider>
     , document.getElementById('root'));
