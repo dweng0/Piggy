@@ -6,11 +6,8 @@ import { createStore } from 'redux';
 
 import Splash from './screens/Splash/Splash';
 import Accounts from './screens/Accounts/Accounts';
-import Goals from './screens/Goals/Goals';
-import Details from './screens/Goals/Details';
-import Create from './screens/Goals/Create';
 import Header from './components/Header/Header';
-import NoService from './screens/NoService/NoService'
+import NoService from './screens/NoService/NoService';
 import NoMatchedRoute from './screens/NoMatchedRoute/NoMatchedRoute';
 import Transactions from './screens/Transactions/Transactions';
 import reducers from './reducers';
@@ -18,7 +15,7 @@ import reducers from './reducers';
 import './index.css';
 
 ReactDOM.render(
-    <Provider store={ createStore(reducers) }> 
+    <Provider store={ createStore(reducers) }>
          <BrowserRouter>
             <div>
                 <Header />
@@ -27,9 +24,6 @@ ReactDOM.render(
                     <Route path="/weekly" component={Transactions} />
                     <Route path="/accounts" component={Accounts} />
                     <Route path="/noservice" component={NoService} />
-                    <Route path="/accounts/accountUid/goals" component={Goals} />
-                    <Route path="/accounts/accountUid/goals/create" exact component={Create} />
-                    <Route path="/accounts/accountUid/goals/savingsGoalUid" component={Details} />
                     <Route component={NoMatchedRoute}/>
                 </Switch>
             </div>
