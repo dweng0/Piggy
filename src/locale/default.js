@@ -14,7 +14,13 @@ export default {
         returnButton: "Go home"
     },
     accountContent: {
-        title: "Your accounts",
+        title: "Loading account details",
         content: "You're only a few steps away from stashing away that loose change"
+    },
+    transactionsText: {
+        title : "Weekly round up",
+        contentinitial: "Grabbing this weeks transactions",
+        contentFailed: "Couldn't get this weeks transactions",
+        contentSuccess: "Ok, we're all set!"
     }
 }

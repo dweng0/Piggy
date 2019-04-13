@@ -1,4 +1,5 @@
 import axios from 'axios';
+import _ from 'underscore';
 import { accessToken } from '../../constants/starlingConstants'
 
 /**
@@ -11,15 +12,32 @@ import { accessToken } from '../../constants/starlingConstants'
  */
 const starling = () => {
     const apiPath = '/api';
+    const configOptions = {
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization' : 'Bearer ' + accessToken
+          },
+        withCredentials: true
+    }
+    
     return {
         identify: () => {
-           return axios.get(apiPath +'/v2/account-holder/individual', {            
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization' : 'Bearer ' + accessToken
-                  },
-                  withCredentials: true,
-            })
+           return axios.get(apiPath +'/v2/account-holder/individual', configOptions)
+        },
+        transactions: (from, to) => {
+            return axios.get(`${apiPath}/v1/transactions?from=${from}&to=${to}`, configOptions)
+        },
+        accounts: () => {
+            return axios.get(`${apiPath}/v2/accounts`, configOptions)
+        },
+        savingGoals:(accountUID) => { 
+            return axios.get(`${apiPath}/v2/accounts/${accountUID}/saving-goals`, configOptions);
+        },
+        createGoal:(accountUID, body) => {
+            return axios.put(`${apiPath}/v2/accounts/${accountUID}/saving-goals`, configOptions);
+        },
+        tranfer: (accountUID, savingsGoalUID, transferUID) => {
+            return axios.put(`${apiPath}/v2/accounts/${accountUID}/saving-goals/${savingsGoalUID}/add-money/${transferUID}`, configOptions);
         }
     }
 }

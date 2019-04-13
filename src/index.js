@@ -10,6 +10,7 @@ import Create from './screens/Goals/Create';
 import Header from './components/Header/Header';
 import NoService from './screens/NoService/NoService'
 import NoMatchedRoute from './screens/NoMatchedRoute/NoMatchedRoute';
+import Transactions from './screens/Transactions/Transactions';
 
 import './index.css';
 
@@ -20,8 +21,9 @@ ReactDOM.render(
                 <Header />
                 <Switch>
                     <Route path="/" exact component={Splash} />
-                    <Route path="/accounts" exact component={Accounts} />
-                    <Route path="/noservice" exact component={NoService} />
+                    <Route path="/weekly" component={Transactions} />
+                    <Route path="/accounts" component={Accounts} />
+                    <Route path="/noservice" component={NoService} />
                     <Route path="/accounts/accountUid/goals" component={Goals} />
                     <Route path="/accounts/accountUid/goals/create" exact component={Create} />
                     <Route path="/accounts/accountUid/goals/savingsGoalUid" component={Details} />

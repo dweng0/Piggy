@@ -15,10 +15,6 @@ export default class Header extends React.Component {
         errors: false
     }
 
-    constructor(props) {
-        super(props);
-    }
-
     /**
      * Basically handle all the different states while we wait for a response
      */
@@ -30,7 +26,9 @@ export default class Header extends React.Component {
         else if(this.state.loadingName)
         {
             return (
-                <div className="small ui active inline loader"></div>
+                <a className="item">
+                    <div className="small ui active inline loader"></div>
+                </a>
             );
         }
         else

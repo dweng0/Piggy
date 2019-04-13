@@ -1,11 +1,12 @@
 {
-  "name": "Piggy",
+  "name": "piggy",
   "version": "0.1.0",
   "private": true,
   "proxy": "https://api-sandbox.starlingbank.com",
   "dependencies": {
     "axios": "^0.18.0",
     "http-proxy-middleware": "^0.19.1",
+    "moment": "^2.24.0",
     "query-string": "^6.4.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
