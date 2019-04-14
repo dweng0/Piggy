@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Header from './Header';
+import Header from './index';
 
 it('Expect header to render', () => {
   const div = document.createElement('div');

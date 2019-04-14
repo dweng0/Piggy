@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { roundUpAmountCalculated } from '../../actions';
 
-import Details from '../../components/Details/Details';
+import Details from '../../components/Details';
 import starling from '../../serviceprovider/starlingbank/interface';
 import cardImage from '../../assets/images/accounts.svg';
 import content from '../../locale/default';

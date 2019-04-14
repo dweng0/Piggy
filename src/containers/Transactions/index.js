@@ -5,10 +5,10 @@ import moment from 'moment';
 import _ from 'underscore';
 
 import { roundUpAmountCalculated } from '../../actions';
-import Details from '../../components/Details/Details';
+import Details from '../../components/Details';
 import cardImage from '../../assets/images/weekly.png';
 import content from '../../locale/default';
-import Loading from '../../components/Loading/loading';
+import Loading from '../../components/Loading';
 import starling from '../../serviceprovider/starlingbank/interface';
 
 const transactionsText = content.transactionsText;

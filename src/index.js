@@ -4,12 +4,12 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
-import Splash from './screens/Splash/Splash';
-import Accounts from './screens/Accounts/Accounts';
-import Header from './components/Header/Header';
-import NoService from './screens/NoService/NoService';
-import NoMatchedRoute from './screens/NoMatchedRoute/NoMatchedRoute';
-import Transactions from './screens/Transactions/Transactions';
+import Splash from './containers/Splash';
+import Accounts from './containers/Accounts';
+import Header from './components/Header';
+import NoService from './containers/NoService';
+import NoMatchedRoute from './containers/NoMatchedRoute';
+import Transactions from './containers/Transactions';
 import reducers from './reducers';
 
 import './index.css';

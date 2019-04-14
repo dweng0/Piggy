@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Details from './Details';
+import List from '.';
 
-it('Expect header to render', () => {
+it('Expect List to Render', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<Details />, div);
+  ReactDOM.render(<List />, div);
   ReactDOM.unmountComponentAtNode(div);
 });

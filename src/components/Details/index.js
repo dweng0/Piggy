@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Image from '../../components/Image/Image';
+import Image from '../Image';
 
 const Details = (props) => {
     return (

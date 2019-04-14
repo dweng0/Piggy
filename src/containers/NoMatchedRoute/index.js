@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import Image from '../../components/Image/Image';
+import Image from '../../components/Image';
 
 import image from '../../assets/images/404.svg';
 import content from '../../locale/default';

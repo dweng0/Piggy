@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from '../../components/Image/Image';
+import Image from '../../components/Image';
 
 import image from '../../assets/images/404.svg';
 

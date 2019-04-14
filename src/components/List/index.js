@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Image from '../Image/Image';
+import Image from '../Image';
 
 /**
 * Display a nice list for our application, the array should contain:

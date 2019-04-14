@@ -1,6 +1,6 @@
 import React from 'react';
 /**
- * Clickable image component for application
+ * Clickable image component for other components and the application in general
  * @returns {class}
  */
 export default class Image extends React.Component {
