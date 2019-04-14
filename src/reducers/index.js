@@ -8,12 +8,12 @@ export const savingAmountReducer = (amount=null, action) => {
     return amount;
 };
 
-export const selectedAccountReducer = (selectedAccount=null, action) => {
-    if(action.type === 'ACCOUNT_SELECTED')
+export const selectedGoalReducer = (selectedGoal=null, action) => {
+    if(action.type === 'GOAL_SELECTED')
     {
         return action.payload
     }
-    return selectedAccount;
+    return selectedGoal;
 }
 
 export const identityReducer = (name=null, action) => {
@@ -26,6 +26,6 @@ export const identityReducer = (name=null, action) => {
 
 export default combineReducers({
     userName: identityReducer,
-    account: selectedAccountReducer,
+    goal: selectedGoalReducer,
     saving: savingAmountReducer
 })

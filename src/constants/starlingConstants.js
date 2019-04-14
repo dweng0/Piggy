@@ -1,3 +1,2 @@
 export const serviceUrl = "https://api-sandbox.starlingbank.com/";
-export const accessToken = "Mz771awWpCZfDbBGR99MYc81RSNXvnG0wbBUN4faJ5tigdnBxe0NpBKpdj0iXeKF";
-export const refreshToken = "EoEngFjuvpcgcxD2PS9klybwiv2dpqiALMb4MYNZMdtN9bwJ5fvguPdnpFrXqydR";
+export const accessToken = "Bn0cWUDgmo6Dc5mDdo9EfxFJTs1XDSTsL1hZTyvmkCl537zyZUV531jzrkvY9EfK";

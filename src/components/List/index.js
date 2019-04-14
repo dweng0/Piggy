@@ -9,6 +9,7 @@ import Image from '../Image';
 *
 */
 const List = (props) => {
+    debugger;
     if(!props.items || !props.items.length)
     {
         throw new Error("items need to be provided as a prop");
@@ -30,7 +31,7 @@ const List = (props) => {
         return (
             items.forEach((item) => {
                 return (
-                    <div className="item">
+                    <div className="item" onClick={() => { if(props.onListItemClicked) { debugger; props.onListItemClicked(item);}}}>
                         {getImage(props.randomImage)}
                         <div className="content">
                             <div className="header">{item.title}</div>

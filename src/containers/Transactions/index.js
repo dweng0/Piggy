@@ -10,6 +10,7 @@ import cardImage from '../../assets/images/weekly.png';
 import content from '../../locale/default';
 import Loading from '../../components/Loading';
 import starling from '../../serviceprovider/starlingbank/interface';
+import classNames from 'classnames';
 
 const transactionsText = content.transactionsText;
 
@@ -17,7 +18,7 @@ class Transactions extends Component {
 
     state = {
         loading: true,
-        transactions: [] //redux this thing
+        transactions: []
     }
 
     constructor(props){
@@ -52,12 +53,16 @@ class Transactions extends Component {
         this.props.roundUpAmountCalculated({ amount: savings, label: savingsLabel });
     }
 
+    /**
+     * When we get a response from the service, we filter the array so that we are only dealing with outbound transactions
+     * Could wrap the get request up a bit more to handle status etc.
+     */
     componentDidMount() {
         starling().transactions(this.state.from, this.state.to)
             .then((response) => {
                 if(response.status === 200)
                 {
-                    //only outbound transactions please
+                    //only outbound transactions
                     this.setState({
                         transactions: _.filter(response.data._embedded.transactions, transaction => { return transaction.direction === "OUTBOUND" }),
                         loading: false
@@ -81,7 +86,6 @@ class Transactions extends Component {
     }
 
     getDetails = () => {
-        debugger;
         let content = transactionsText.contentinitial;
         if(this.state.errors)
         {
@@ -111,16 +115,23 @@ class Transactions extends Component {
         }
         else
         {
+            const buttonClass = classNames({
+                'ui': true,
+                'massive':true,
+                'teal': true,
+                'button': true,
+                'disabled': (this.state.savings === 0)
+            });
             return (
                 <div>
-                    <p>If you round up all your transactions, you could make a tidy saving of</p>
+                    <p>{ (this.state.savings > 0) ?  transactionsText.savingsSummary : transactionsText.saveNothing }</p>
                 <div className="ui statistic">
                     <div className="value">
                         {this.state.savingsLabel}
                     </div>
                 </div>
                 <div>
-                    <Link to="/accounts" className="massive teal ui button">Round up my transactions</Link>
+                    <Link to="/accounts" className={buttonClass}>{transactionsText.roundUpButtonLabel}</Link>
                 </div>
             </div>
             );
@@ -150,9 +161,7 @@ class Transactions extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return {
-
-    }
+   return state;
 }
 
 export default connect(mapStateToProps, { roundUpAmountCalculated })(Transactions);

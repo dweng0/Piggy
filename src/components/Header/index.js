@@ -18,6 +18,7 @@ class Header extends React.Component {
 
     /*
     * Set the name content area based on state
+    * only show the amount that can be saved if ths saving exists and is greater than 0
     */
     setNameContentArea = () => {
         if(this.state.errors)
@@ -35,7 +36,7 @@ class Header extends React.Component {
         else
         {
             let wording = `Hey ${this.state.name}`;
-            if(this.props.saving)
+            if(this.props.saving && this.props.saving.amount > 0)
             {
                 wording += `, lets save ${this.props.saving.label}`;
             }

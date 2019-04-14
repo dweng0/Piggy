@@ -5,10 +5,10 @@ export const userNameDefined = name => {
     }
 }
 
-export const accountSelected = account => {
+export const goalSelected = goal => {
     return {
-        type: 'ACCOUNT_SELECTED',
-        payload: account
+        type: 'GOAL_SELECTED',
+        payload: goal
     }
 }
 
