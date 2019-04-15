@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'underscore';
 import content from '../../locale/default';
 
 const goalContent = content.saveGoal;
@@ -13,6 +14,14 @@ class GoalForm extends React.Component{
     state = {
         name: '',
         amount: 0
+    }
+
+    constructor(props) {
+        super(props);
+        if(!_.isFunction(props.afterGoalSubmit))
+        {
+            throw new Error("GoalForm component requires an afterGoalSubmit function");
+        }
     }
 
     handleGoalSubmit = (event) => {

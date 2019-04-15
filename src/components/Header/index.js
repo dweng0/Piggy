@@ -23,12 +23,12 @@ class Header extends React.Component {
     setNameContentArea = () => {
         if(this.state.errors)
         {
-            return <button href="" className="item"><i className="exclamation circle icon"></i>{headerContent.failedToConnect}</button>
+            return <button className="item"><i className="exclamation circle icon"></i>{headerContent.failedToConnect}</button>
         }
         else if(this.state.loadingName)
         {
             return (
-                <button href="" className="item">
+                <button className="item">
                     <div className="small ui active inline loader"></div>
                 </button>
             );
@@ -41,7 +41,7 @@ class Header extends React.Component {
                 wording += `, lets save ${this.props.saving.label}`;
             }
            return (
-            <a className="item" href="/">{wording}</a>
+            <a id="username" className="item" href="/">{wording}</a>
            );
         }
     }

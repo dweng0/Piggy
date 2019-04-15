@@ -1,8 +1,28 @@
 import React from 'react';
-
 import Image from '../Image';
 
 const Details = (props) => {
+    let errors = [];
+    if(!props.title)
+    {
+        errors.push("No title provided");
+    }
+
+    if(!props.content)
+    {
+        errors.push("No content provided");
+    }
+
+    if(!props.cardImage)
+    {
+        errors.push("No image provided");
+    }
+
+    if(!_.isEmpty(errors))
+    {
+        throw new Error(errors.reduce((prev, current) => {return prev + ", " + current}));
+    }
+
     return (
         <div>
             <div className="ui">

@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'underscore';
 
 /**
 * Display a nice list for our application, the array should contain:
@@ -7,24 +8,23 @@ import React from 'react';
 *
 */
 const List = (props) => {
-    debugger;
-    if(!props.items || !props.items.length)
+    
+    if(!props.items || !_.isArray(props.items) || _.isEmpty(props.items))
     {
         throw new Error("items need to be provided as a prop");
     }
 
     const renderItems = (items) => {
-        return items.map((item) => {
-                return (
-                    <div className="item" onClick={() => { if(props.onListItemClicked) { debugger; props.onListItemClicked(item);}}}>
-                        <div className="content">
-                            <div className="header">{item.title}</div>
-                            {item.content}
-                        </div>
+        return items.map((item, index) => {
+            return (
+                <div key={index} className="item" onClick={() => { if(props.onListItemClicked) { debugger; props.onListItemClicked(item);}}}>
+                    <div className="content">
+                        <div className="header">{item.title}</div>
+                        {item.content}
                     </div>
-                );
-                
-            });    
+                </div>
+            );
+        });
     }
     return (
         <div>

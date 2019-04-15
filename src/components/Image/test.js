@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
 import Image from './index';
 
@@ -15,14 +14,10 @@ it('should render when src props is provided', () => {
 
 it('should apply css from props if provided', () => {
     let image = shallow(<Image src="/" className="testCSS" />);
-    let className = image.hasClass('testCSS');
-    console.log(image);
-    expect(className).toBe(true);
+    expect(image.hasClass('testCSS')).toBe(true);
 });
 
 it('should update class with size if provided', () =>{ 
     let image = shallow(<Image src="/" size="large" />);
-    let largeClass = image.hasClass('large');
-    console.log(image);
-    expect(largeClass).toBe(true);
+    expect(image.hasClass('large')).toBe(true);
 });
