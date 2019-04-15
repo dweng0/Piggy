@@ -1,21 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import content from '../../locale/default';
 
-import { userSubmittedGoal } from '../../actions';
-
-const content = {
-    submit: "Submit",
-    name: {
-        placeHolder: "Name",
-        label: "Give your saving goal a meaningful name",
-        validation: "Alphanumeric characters only"
-    },
-    amount: {
-        placeHolder: "Amount",
-        label: "",
-        validation: "Numbers only, no decimal places"
-    }
-}
+const goalContent = content.saveGoal;
 
 /**
  * HTML5 validation:
@@ -58,14 +44,14 @@ class GoalForm extends React.Component{
                                     <input 
                                         type="text"
                                         pattern="[A-Za-z0-9 ]+" 
-                                        title={content.name.validation} 
+                                        title={goalContent.name.validation} 
                                         name="name" 
-                                        placeholder={content.name.placeHolder}
+                                        placeholder={goalContent.name.placeHolder}
                                         value={this.state.name}
                                         onChange={e => { this.setState({name: e.target.value})}}
                                         required/>
                                     <div className="ui pointing label">
-                                        {content.name.label}
+                                        {goalContent.name.label}
                                     </div>
                                 </div>                                
                                 <div className="ui right labeled input">
@@ -75,11 +61,11 @@ class GoalForm extends React.Component{
                                         min="1" 
                                         max={Number.MAX_SAFE_INTEGER}
                                         pattern="[1-9]+\d"
-                                        title={content.amount.validation}
+                                        title={goalContent.amount.validation}
                                         name="amount" 
                                         value= {this.state.amount}
                                         onChange = {e => { this.setState({ amount: e.target.value})}}
-                                        placeholder={content.amount.placeHolder} 
+                                        placeholder={goalContent.amount.placeHolder} 
                                         required 
                                         id="amount"
                                         />
@@ -87,7 +73,7 @@ class GoalForm extends React.Component{
                                 </div>
                                 <div className="ui divider"></div>
                                 <div className="field">
-                                    <button type="submit" className="large teal ui button">{content.submit}</button>
+                                    <button type="submit" className="large teal ui button">{goalContent.submit}</button>
                                 </div>
                             </form>
                         </div>
@@ -97,7 +83,4 @@ class GoalForm extends React.Component{
         );
     }
 }
-const mapStateToProps = (state) => {
-    return state
-}
-export default connect(mapStateToProps, )(GoalForm);
+export default GoalForm;

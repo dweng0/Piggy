@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 
 import logo from '../../logo.svg';
-import styles from  '../Styles/App.css';
 import Image from '../../components/Image';
 import content from '../../locale/default';
 

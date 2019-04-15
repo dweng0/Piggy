@@ -1,7 +1,5 @@
 import React from 'react';
 
-import Image from '../Image';
-
 /**
 * Display a nice list for our application, the array should contain:
 * the array item should be {title, content, src, randomImage}

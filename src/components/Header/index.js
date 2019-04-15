@@ -23,14 +23,14 @@ class Header extends React.Component {
     setNameContentArea = () => {
         if(this.state.errors)
         {
-            return <a className="item"><i className="exclamation circle icon"></i>{headerContent.failedToConnect}</a>
+            return <button href="" className="item"><i className="exclamation circle icon"></i>{headerContent.failedToConnect}</button>
         }
         else if(this.state.loadingName)
         {
             return (
-                <a className="item">
+                <button href="" className="item">
                     <div className="small ui active inline loader"></div>
-                </a>
+                </button>
             );
         }
         else

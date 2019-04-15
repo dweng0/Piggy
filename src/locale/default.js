@@ -32,5 +32,18 @@ export default {
         savingsSummary: "If you round up all your transactions, you could make a tidy saving of",
         saveNothing: "We couldn't find any savings for you this week. Lets try again next week",
         roundUpButtonLabel: "Choose a savings goal"
+    },
+    saveGoal: {
+        submit: "Submit",
+        name: {
+            placeHolder: "Name",
+            label: "Give your saving goal a meaningful name",
+            validation: "Alphanumeric characters only"
+        },
+        amount: {
+            placeHolder: "Amount",
+            label: "",
+            validation: "Numbers only, no decimal places"
+        }
     }
 }

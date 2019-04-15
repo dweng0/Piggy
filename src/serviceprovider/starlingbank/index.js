@@ -1,5 +1,4 @@
 import axios from 'axios';
-import _ from 'underscore';
 import { accessToken } from '../../constants/starlingConstants'
 
 /**
