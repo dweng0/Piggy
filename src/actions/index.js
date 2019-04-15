@@ -12,6 +12,13 @@ export const goalSelected = goal => {
     }
 }
 
+export const userSubmitedGoal = goal => {
+    return {
+        type: 'GOAL_SUBMITTED',
+        payload: goal
+    }
+}
+
 export const roundUpAmountCalculated = amount => {
     return {
         type: 'AMOUNT_CALCULATED',

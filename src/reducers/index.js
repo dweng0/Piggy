@@ -8,7 +8,23 @@ export const savingAmountReducer = (amount=null, action) => {
     return amount;
 };
 
-export const selectedGoalReducer = (selectedGoal=null, action) => {
+export const goalReducer = (goal=null, action) => {
+
+    switch(action.type)
+    {
+        case 'GOAL_SELECTED':
+        case 'GOAL_SUBMITTED':
+        {
+            return action.payload
+        }
+        default: 
+        {
+            return goal
+        }
+    }
+}
+
+export const userSubmittedGoalReducer = (selectedGoal=null, action) => {
     if(action.type === 'GOAL_SELECTED')
     {
         return action.payload
@@ -26,6 +42,6 @@ export const identityReducer = (name=null, action) => {
 
 export default combineReducers({
     userName: identityReducer,
-    goal: selectedGoalReducer,
+    goal: goalReducer,
     saving: savingAmountReducer
 })

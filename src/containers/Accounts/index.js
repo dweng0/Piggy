@@ -13,6 +13,7 @@ import loadingImage from '../../assets/images/loading.svg';
 import errorImage from '../../assets/images/warning.svg';
 import content from '../../locale/default';
 
+
 const accountContent = content.accountContent;
 
 /**
@@ -22,7 +23,7 @@ class Accounts extends Component {
   state = {
     loading: true,
     account:null,
-    errors: false
+    errors: false,
   }
 
   renderDetails = () => {
@@ -55,11 +56,9 @@ class Accounts extends Component {
     }
   }
 
-  componentDidMount() {
-    debugger //looking for goal in props (from redux)
+  getGoals = () =>{
     starling().accounts()
       .then((response) => {
-        debugger;
         if(response.status === 200)
         {
           //accounts comes back as an array indicating more than one, however v1 comes back as an object
@@ -122,7 +121,12 @@ class Accounts extends Component {
       );
   }
 
+  componentDidMount() {
+    this.getGoals();
+  }
+
   renderAccountsArea = () => {
+    debugger;
     if(!this.state.loading && !this.state.errors && !_.isEmpty(this.state.savingGoals))
     {
       const percentCompleteJSX = (percent) => {
@@ -136,11 +140,17 @@ class Accounts extends Component {
       let savingViewData = this.state.savingGoals.map(goal => {
         return {
           savingsGoalUid: goal.savingsGoalUid,
-          name: goal.name,
-          percent: percentCompleteJSX(goal.savedPercentage)
+          title: goal.name,
+          content: percentCompleteJSX(goal.savedPercentage)
         }
       })
-      return <List items={savingViewData} onListItemClicked={(selectedData)=> {this.props.selectedAccountReducer(selectedData)}} />
+      return (
+        <div className="ui two column centered grid">
+          <div className="column">
+            <List items={savingViewData} onListItemClicked={(selectedData)=> {this.props.selectedAccountReducer(selectedData)}} />
+          </div>
+        </div>
+      );
     }
     if(!this.state.loading && _.isEmpty(this.state.savingGoals))
     {
@@ -152,9 +162,9 @@ class Accounts extends Component {
                     <i className="inbox icon"></i>
                     <div className="content">
                       <div className="header">
-                        You have no saving goals
+                        {accountContent.noSavingGoal}
                       </div>
-                      <p>Help reach your saving targets by creating a saving goal today</p>
+                      <p>{accountContent.noSavingGoalSummary}</p>
                     </div>
                   </div>
                 </div>
@@ -165,9 +175,39 @@ class Accounts extends Component {
     return ""
   }
 
-  handleGoalSubmit = (event) => {
-    debugger
-    console.log(event);
+  afterGoalSubmit = (newGoal) => {
+    if(!_.isEmpty(newGoal))
+    {
+      starling().createGoal(this.state.account.accountUid, newGoal)
+        .then(() =>{ this.getGoals(); this.loadCreateForm();})
+        .catch(this.loadCreateForm(true));
+    }
+  }
+
+  loadCreateForm = (errors) => {
+    if(errors)
+    {
+      return (
+        <div>
+          <div className="ui two column centered grid">
+            <div className="column">
+              <div className="ui negative message">
+                <div className="header">
+                  Failed to save goal
+                </div>
+                <p>There was a problem saving your goal, please try again.</p>
+              </div>
+            </div>
+          </div>
+          <GoalForm afterGoalSubmit={this.afterGoalSubmit}/>
+        </div>
+      );
+    }
+    else
+    {
+      return  <GoalForm afterGoalSubmit={this.afterGoalSubmit}/>
+    }
+    
   }
   
   render() {
@@ -175,7 +215,7 @@ class Accounts extends Component {
       <div>
         {this.renderDetails()}
         {this.renderAccountsArea()}
-        <GoalForm onGoalSubmit={(e) => {this.handleGoalSubmit(e)}}/>
+        {this.loadCreateForm()}
       </div>
 
     );

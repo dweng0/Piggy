@@ -20,7 +20,9 @@ export default {
         errorTitle: "There was an error",
         errorContent: "We were unable to load your account",
         loadedTitle: "Account loaded",
-        loadedContent: "Select a saving goal, or create one"
+        loadedContent: "Select a saving goal, or create one",
+        noSavingGoal: "You have no saving goals",
+        noSavingGoalSummary: "Help reach your saving targets by creating a saving goal today"
     },
     transactionsText: {
         title : "Weekly round up",

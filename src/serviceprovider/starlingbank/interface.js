@@ -30,10 +30,10 @@ const starling = () => {
             return axios.get(`${apiPath}/v2/accounts`, configOptions)
         },
         savingGoals:(accountUID) => {
-            return axios.get(`${apiPath}/v2/accounts/${accountUID}/savings-goals`, configOptions);
+            return axios.get(`${apiPath}/v2/account/${accountUID}/savings-goals`, configOptions);
         },
         createGoal:(accountUID, body) => {
-            return axios.put(`${apiPath}/v2/accounts/${accountUID}/savings-goals`, configOptions);
+            return axios.put(`${apiPath}/v2/account/${accountUID}/savings-goals`, body, configOptions);
         },
         tranfer: (accountUID, savingsGoalUID, transferUID) => {
             return axios.put(`${apiPath}/v2/accounts/${accountUID}/savings-goals/${savingsGoalUID}/add-money/${transferUID}`, configOptions);
