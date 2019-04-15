@@ -147,7 +147,7 @@ class Accounts extends Component {
       return (
         <div className="ui two column centered grid">
           <div className="column">
-            <List items={savingViewData} onListItemClicked={(selectedData)=> {this.props.selectedAccountReducer(selectedData)}} />
+            <List items={savingViewData} onListItemClicked={(selectedData)=> { debugger; this.props.goalSelected(selectedData)}} />
           </div>
         </div>
       );
