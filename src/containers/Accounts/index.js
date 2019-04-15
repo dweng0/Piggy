@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import _ from 'underscore';
+import $ from 'jQuery';
+import semantic from '../../assets/vendor/semantic';
 
 import { goalSelected } from '../../actions';
 import GoalForm from '../../components/GoalForm';
@@ -131,7 +133,7 @@ class Accounts extends Component {
     {
       const percentCompleteJSX = (percent) => {
         return(
-          <div className="ui indicating progress" data-percent={percent}>
+          <div className="ui indicating progress" data-percent={percent} onLoadedMetadata={() => { $(this).progress();}}>
             <div className="bar"></div>
             <div className="label">Funded</div>
           </div>
