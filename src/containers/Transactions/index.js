@@ -13,7 +13,7 @@ import starling from '../../serviceprovider/starlingbank';
 import classNames from 'classnames';
 
 const transactionsText = content.transactionsText;
-
+const currencyFormat = content.currency.format;
 class Transactions extends Component {
 
     state = {
@@ -48,7 +48,7 @@ class Transactions extends Component {
             return pre + (roundedUp - spentAmount)
         }, 0);
 
-        const savingsLabel =  (savings).toLocaleString("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2})
+        const savingsLabel =  (savings).toLocaleString("en-GB", currencyFormat)
         this.setState({savings, savingsLabel});
         this.props.roundUpAmountCalculated({ amount: savings, label: savingsLabel });
     }

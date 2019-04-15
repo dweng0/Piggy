@@ -26,7 +26,7 @@ const Details = (props) => {
 
     return (
         <div>
-            <div className="ui">
+            <div className="ui" style={{minHeight: '255px'}}>
                 <Image src={props.cardImage} size="small" className="centered"/>
             </div>
             <h2 className="ui icon center aligned header">

@@ -12,7 +12,6 @@ export const goalReducer = (goal=null, action) => {
 
     switch(action.type)
     {
-        case 'GOAL_SELECTED':
         case 'GOAL_SUBMITTED':
         {
             return action.payload

@@ -3,18 +3,20 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import _ from 'underscore';
 
-import { goalSelected } from '../../actions';
 import GoalForm from '../../components/GoalForm';
 import Details from '../../components/Details';
 import List from '../../components/List';
+import Loading from '../../components/Loading';
 import starling from '../../serviceprovider/starlingbank';
 import cardImage from '../../assets/images/accounts.svg';
 import loadingImage from '../../assets/images/loading.svg';
+import successImage from '../../assets/images/success.svg'
 import errorImage from '../../assets/images/warning.svg';
 import content from '../../locale/default';
 
 
 const accountContent = content.accountContent;
+const currencyFormat = content.currency.format;
 
 /**
  * Load user accounts so that they can pick one to put savings into
@@ -24,16 +26,36 @@ class Accounts extends Component {
     loading: true,
     account:null,
     errors: false,
+    savingsSaved: false,
+    savingGoals: []
   }
 
+  constructor(props) {
+    super(props);
+    //partial args on callback to provide starling interface without polluting List component
+    this.afterGoalSelected = _.partial(this.afterGoalSelected, _, starling);
+  }
+
+  /**
+   * state should really be one 'switchable' string value here
+   */
   renderDetails = () => {
+    let detailContent;
     if(!this.props.saving)
     {
       return <Redirect to="/"/>
+    } 
+      else if(this.state.savingsSaved)
+    {
+      detailContent = {
+        imgSrc: successImage,
+        title: accountContent.successTitle,
+        content: accountContent.successContent
+      };
     }
     else
     {
-      const detailContent = {
+      detailContent = {
         imgSrc: loadingImage,
         title: accountContent.loadingTitle,
         content: accountContent.loadingContent
@@ -51,12 +73,57 @@ class Accounts extends Component {
         detailContent.title = accountContent.loadedTitle;
         detailContent.content = accountContent.loadedContent;
       }
-
-      return <Details cardImage={detailContent.imgSrc} title={detailContent.title} content={detailContent.content} />
     }
+    return <Details cardImage={detailContent.imgSrc} title={detailContent.title} content={detailContent.content} />
+  }
+
+  afterGoalSelected = (goalUID, starling) => { 
+    this.setState({
+      attemptingTransaction: true
+    });
+
+    const savingsGoal = this.state.savingGoals.find(goal => {
+      return goal.savingsGoalUid === goalUID;
+    });
+    
+    if(!_.isUndefined(savingsGoal))
+    {
+      const body = {
+        amount: {
+          currency: content.currency.short,
+          minorUnits: Math.floor(this.props.saving.amount * 100) //move decimal along two places
+        }
+      };
+  
+      starling().transfer(this.state.account.accountUid, savingsGoal.savingsGoalUid, body).then(
+        response => {
+          this.getGoals();
+          this.setState({
+            attemptingTransaction: false,
+            savingsSaved: true
+          });          
+        }
+      ).catch(
+        (err) => {
+          this.setState({
+            errors: true,
+            loading: false
+          });
+        }
+      );
+    }
+    else
+    {
+      this.setState({
+        errors: true,
+        loading: false
+      });
+    }    
   }
 
   getGoals = () =>{
+
+    this.setState({savingsSaved: false});
     starling().accounts()
       .then((response) => {
         if(response.status === 200)
@@ -89,7 +156,7 @@ class Accounts extends Component {
 
             })
             .catch( err => {
-              if(err.response.status === 404)
+              if(err.response && err.response.status === 404)
               {
                 this.setState({
                   loading: false,
@@ -128,11 +195,15 @@ class Accounts extends Component {
   renderAccountsArea = () => {
     if(!this.state.loading && !this.state.errors && !_.isEmpty(this.state.savingGoals))
     {
-      const percentCompleteJSX = (percent) => {
+      const contentJSX = (goal) => {
+        const money = {
+          target: (goal.target.minorUnits / 100).toLocaleString("en-GB", currencyFormat),
+          saved: (goal.totalSaved.minorUnits / 100).toLocaleString("en-GB", currencyFormat),
+        };
         return(
           <div className="ui indicating progress">
-            <progress value={percent} max="100" className="bar"></progress>
-            <div className="label">Funded</div>
+            <progress value={goal.savedPercentage} max="100" className="bar" style={{width: '100%'}}>{money.saved}</progress>
+            <div className="label">Saved {money.saved}, Target {money.target} </div>
           </div>
         );
       }
@@ -140,13 +211,14 @@ class Accounts extends Component {
         return {
           savingsGoalUid: goal.savingsGoalUid,
           title: goal.name,
-          content: percentCompleteJSX(goal.savedPercentage)
+          content: contentJSX(goal),
+         
         }
-      })
+      });
       return (
         <div className="ui two column centered grid">
           <div className="column">
-                <List items={savingViewData} onListItemClicked={(selectedData)=> { this.props.goalSelected(selectedData)}} />
+                <List items={savingViewData} onListItemClicked={(selectedData)=> { this.afterGoalSelected(selectedData); }} />
           </div>
         </div>
       );
@@ -171,7 +243,7 @@ class Accounts extends Component {
         </div>
       );
     }
-    return ""
+    return <div style={{minHeight: '477px'}}><Loading/></div>
   }
 
   afterGoalSubmit = (newGoal) => {
@@ -183,6 +255,11 @@ class Accounts extends Component {
     }
   }
 
+  /**
+   * PUT the data to the api, 
+   * Make sure goal exists, 
+   * make sure saving is in minor unit format (no decimals)
+   */
   loadCreateForm = (errors) => {
     if(errors)
     {
@@ -216,7 +293,6 @@ class Accounts extends Component {
         {this.renderAccountsArea()}
         {this.loadCreateForm()}
       </div>
-
     );
   }
 }
@@ -225,4 +301,4 @@ const mapStateToProps = (state) => {
   return state;
 }
 
-export default connect(mapStateToProps, {goalSelected})(Accounts);
+export default connect(mapStateToProps)(Accounts);

@@ -5,13 +5,6 @@ export const userNameDefined = name => {
     }
 }
 
-export const goalSelected = goal => {
-    return {
-        type: 'GOAL_SELECTED',
-        payload: goal
-    }
-}
-
 export const userSubmitedGoal = goal => {
     return {
         type: 'GOAL_SUBMITTED',

@@ -1,4 +1,8 @@
 export default {
+    currency :{
+        short: "GBP",
+        format: {style: "currency", currency: "GBP", minimumFractionDigits: 2}
+    },
     splash: {
         welcome: "Welcome to Piggy!",
         subTitle: "Start saving"
@@ -14,13 +18,14 @@ export default {
         returnButton: "Go home"
     },
     accountContent: {
-        
+        successTitle: "Nice one",
+        successContent: "We've added those savings for you",
         loadingTitle: "grabbing your account",
         loadingContent: "You're only a few steps away from stashing away that loose change",
         errorTitle: "There was an error",
-        errorContent: "We were unable to load your account",
+        errorContent: "We were unable to process the request",
         loadedTitle: "Account loaded",
-        loadedContent: "Select a saving goal, or create one",
+        loadedContent: "Select a saving goal or create one",
         noSavingGoal: "You have no saving goals",
         noSavingGoalSummary: "Help reach your saving targets by creating a saving goal today"
     },
@@ -37,8 +42,11 @@ export default {
         submit: "Submit",
         name: {
             placeHolder: "Name",
-            label: "Give your saving goal a meaningful name",
+            label: "Give your goal a meaningful name",
             validation: "Alphanumeric characters only"
+        },
+        file: {
+            label: "Add a picture to your goal"
         },
         amount: {
             placeHolder: "Amount",

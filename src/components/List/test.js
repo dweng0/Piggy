@@ -29,7 +29,7 @@ describe("Positive and negative testing", () =>{
     });
     const list = shallow(<List items={items} />);
 
-    expect(list.exists('.item')).toBe(true);
+    expect(list.exists('.card')).toBe(true);
   })
  });
  

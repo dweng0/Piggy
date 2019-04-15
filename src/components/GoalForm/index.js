@@ -74,7 +74,10 @@ class GoalForm extends React.Component{
                                         accept=".png, .jpg"
                                         placeholder="pick a file to upload"
                                         onChange={e => { this.convertFile(e, this);}}
-                                        required/>
+                                        />
+                                    <div className="ui pointing label">
+                                        {goalContent.file.label}
+                                    </div>
                                 </div>  
                                 <div className="field">
                                     <input 
