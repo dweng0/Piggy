@@ -1,9 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { shallow } from 'enzyme';
 import Image from './index';
 
-it('Expect header to render', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<Image />, div);
-  ReactDOM.unmountComponentAtNode(div);
+it('should throw with no props', () => {
+  expect(() => {
+      shallow(<Image/>)
+  }).toThrow();
+
+  expect(shallow(<Image s))
 });
