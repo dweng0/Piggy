@@ -17,7 +17,7 @@ const NoMatchedRoute = (props) => {
                 <Image src={image} size="medium" className="circular"/>
                 <p>{notFoundContent.missing}</p>
                 <Link to="/">
-                    <button className="massive blue ui button">{notFoundContent.returnButton}</button>
+                    <button className="massive teal ui button">{notFoundContent.returnButton}</button>
                 </Link>
         </header>
         </div>

@@ -1,7 +1,6 @@
 import React from 'react';
 import _ from 'underscore';
 import content from '../../locale/default';
-
 const goalContent = content.saveGoal;
 
 /**
@@ -24,6 +23,25 @@ class GoalForm extends React.Component{
         }
     }
 
+    convertFile = (event, scope) => {
+        if(event.target.files[0])
+        {
+            const reader = new FileReader();
+            let base64 = '';
+            reader.onloadend = () => {
+                if(reader.result)
+                {
+                    debugger;
+                    console.log(reader.result)
+                    scope.setState({
+                        base64: reader.result.split(',')[1]
+                    });
+                }
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    }
+
     handleGoalSubmit = (event) => {
         event.preventDefault();
         this.props.afterGoalSubmit({
@@ -33,7 +51,7 @@ class GoalForm extends React.Component{
                 currency: 'GBP',
                 minorUnits: (this.state.amount * 100)
             },
-            base64EncodedPhoto: "notset"
+            base64EncodedPhoto: this.state.base64
         });
         return false;
       }
@@ -49,6 +67,15 @@ class GoalForm extends React.Component{
                                Create a new goal
                             </h2>
                             <form className="ui fluid form" onSubmit={(e) => {this.handleGoalSubmit(e);}}>
+                                <div className="field">
+                                    <input 
+                                        type="file"
+                                        name="file"
+                                        accept=".png, .jpg"
+                                        placeholder="pick a file to upload"
+                                        onChange={e => { this.convertFile(e, this);}}
+                                        required/>
+                                </div>  
                                 <div className="field">
                                     <input 
                                         type="text"

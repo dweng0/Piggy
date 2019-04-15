@@ -5,6 +5,10 @@ import logo from '../../logo.svg';
 import Image from '../../components/Image';
 import content from '../../locale/default';
 
+// @ts-ignore
+// eslint-disable-next-line no-unused-vars
+import './splash.css';
+
 const splashContent = content.splash;
 
 /**

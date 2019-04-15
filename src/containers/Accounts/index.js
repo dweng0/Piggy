@@ -29,7 +29,7 @@ class Accounts extends Component {
   renderDetails = () => {
     if(!this.props.saving)
     {
-      return <Redirect to="/weekly"/>
+      return <Redirect to="/"/>
     }
     else
     {
@@ -126,7 +126,6 @@ class Accounts extends Component {
   }
 
   renderAccountsArea = () => {
-    debugger;
     if(!this.state.loading && !this.state.errors && !_.isEmpty(this.state.savingGoals))
     {
       const percentCompleteJSX = (percent) => {
@@ -147,7 +146,7 @@ class Accounts extends Component {
       return (
         <div className="ui two column centered grid">
           <div className="column">
-            <List items={savingViewData} onListItemClicked={(selectedData)=> { debugger; this.props.goalSelected(selectedData)}} />
+                <List items={savingViewData} onListItemClicked={(selectedData)=> { this.props.goalSelected(selectedData)}} />
           </div>
         </div>
       );
