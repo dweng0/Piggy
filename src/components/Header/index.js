@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 
 import content from '../../locale/default';
-import starling from '../../serviceprovider/starlingbank/interface';
+import starling from '../../serviceprovider/starlingbank';
 
 const headerContent = content.header;
 /**

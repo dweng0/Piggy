@@ -9,7 +9,7 @@ import Details from '../../components/Details';
 import cardImage from '../../assets/images/weekly.png';
 import content from '../../locale/default';
 import Loading from '../../components/Loading';
-import starling from '../../serviceprovider/starlingbank/interface';
+import starling from '../../serviceprovider/starlingbank';
 import classNames from 'classnames';
 
 const transactionsText = content.transactionsText;

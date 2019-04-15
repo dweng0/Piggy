@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import _ from 'underscore';
-import $ from 'jQuery';
-import semantic from '../../assets/vendor/semantic';
 
 import { goalSelected } from '../../actions';
 import GoalForm from '../../components/GoalForm';
 import Details from '../../components/Details';
 import List from '../../components/List';
-import starling from '../../serviceprovider/starlingbank/interface';
+import starling from '../../serviceprovider/starlingbank';
 import cardImage from '../../assets/images/accounts.svg';
 import loadingImage from '../../assets/images/loading.svg';
 import errorImage from '../../assets/images/warning.svg';
@@ -66,7 +64,7 @@ class Accounts extends Component {
           //accounts comes back as an array indicating more than one, however v1 comes back as an object
           starling().savingGoals(response.data.accounts[0].accountUid)
             .then((goalResponse) =>{
-                
+
                 switch(goalResponse.status)
                 {
                   case 200:
@@ -88,7 +86,7 @@ class Accounts extends Component {
                     break
                   }
                 }
-              
+
             })
             .catch( err => {
               if(err.response.status === 404)
@@ -103,7 +101,7 @@ class Accounts extends Component {
               {
                 this.setState({loading: false, errors: true})
               }
-            });          
+            });
         }
         else
         {
@@ -112,7 +110,7 @@ class Accounts extends Component {
             loading: false
           });
         }
-        
+
       })
       .catch( () => {
             this.setState({
@@ -133,8 +131,8 @@ class Accounts extends Component {
     {
       const percentCompleteJSX = (percent) => {
         return(
-          <div className="ui indicating progress" data-percent={percent} onLoadedMetadata={() => { $(this).progress();}}>
-            <div className="bar"></div>
+          <div className="ui indicating progress">
+            <progress value={percent} max="100" className="bar"></progress>
             <div className="label">Funded</div>
           </div>
         );
@@ -172,7 +170,7 @@ class Accounts extends Component {
                 </div>
             </div>
         </div>
-      );     
+      );
     }
     return ""
   }
@@ -209,9 +207,9 @@ class Accounts extends Component {
     {
       return  <GoalForm afterGoalSubmit={this.afterGoalSubmit}/>
     }
-    
+
   }
-  
+
   render() {
     return (
       <div>
