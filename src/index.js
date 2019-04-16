@@ -9,7 +9,7 @@ import Accounts from './containers/Accounts';
 import Header from './components/Header';
 import NoMatchedRoute from './containers/NoMatchedRoute';
 import Transactions from './containers/Transactions';
-import Success from './containers/success';
+import Success from './containers/Success';
 import reducers from './reducers';
 
 import './index.css';

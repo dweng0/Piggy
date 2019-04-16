@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'underscore';
-import { ImageGroup } from 'semantic-ui-react';
+
 /**
  * Render image component for other components and the application in general
  * @returns {class}
@@ -28,7 +28,6 @@ export default class ImageComponent extends React.Component {
 
         if(this.props.base64)
         {
-            debugger;
             // server saves just the base64 type (not data URI), so have to try and find the correct datatype on the frontend
            const findCorrectImageDataType = (base64Part) => {
                 return  new Promise((resolve, reject) => {
@@ -43,7 +42,10 @@ export default class ImageComponent extends React.Component {
                             {
                                return resolve(src);
                             }
-                            imagesToLoad--;
+                            else
+                            {
+                                imagesToLoad--;
+                            }
                             if(imagesToLoad === 0)
                             {
                                 return reject("No acceptable data types found found");
@@ -57,19 +59,48 @@ export default class ImageComponent extends React.Component {
            }
            findCorrectImageDataType(this.props.src)
             .then(src => {
-                this.state.imageSource = src;
+                this.setState({
+                    imageSource: src
+                });
             })
             .catch(err => {
-                console.log(err);
+                console.warn(err);
+                this.setState({
+                    imageSource: '../../assets/images/noImage'
+                });
             })
         }
     }
+
+    /**
+     * Apply external css where applicable
+     */
     getCss = () => {
-        return "ui image " + this.props.className + " " + this.props.size;
+        let imageCss = "ui image";
+        if(this.props.className)
+        {
+            imageCss += " " + this.props.className;
+        }
+
+        if(this.props.size)
+        {
+            imageCss += " " + this.props.size;
+        }
+        return imageCss;
     }
+
+    getStyle = (style) => {
+        let defaultStyle = {
+            margin: 'auto'
+        };
+
+        return _.extend(defaultStyle, style);
+    }
+    
     render(){
+        debugger;
         return (
-            <img alt="" src={this.state.imageSource} className={this.getCss()} style={{margin: 'auto'}} />
+            <img alt="" src={this.state.imageSource} className={this.getCss()} style={this.getStyle(this.props.style)} />
         );
     }
 }

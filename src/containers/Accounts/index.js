@@ -41,6 +41,7 @@ class Accounts extends Component {
    */
   renderDetails = () => {
     let detailContent;
+    debugger;
     if(!this.props.saving || starling().hasCookie())
     {
       return <Redirect to="/"/>
@@ -67,7 +68,7 @@ class Accounts extends Component {
         detailContent.title = accountContent.errorTitle;
         detailContent.content = accountContent.errorContent;
       }
-      else if(!this.state.loading)
+      else if(this.state.loading)
       {
         detailContent.imgSrc = cardImage;
         detailContent.title = accountContent.loadedTitle;
@@ -281,6 +282,7 @@ class Accounts extends Component {
    * make sure saving is in minor unit format (no decimals)
    */
   loadCreateForm = (errors) => {
+    debugger;
     if(errors)
     {
       return (

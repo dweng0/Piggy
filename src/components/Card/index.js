@@ -71,7 +71,7 @@ export default class Card extends React.Component {
     renderImage = () => {
         if(this.state.imageLoaded)
         {
-            return <Image src={this.state.image64} size="medium" base64="true" />
+            return <Image src={this.state.image64} size="medium" base64="true" stye={{height: '100%'}} />
         }
         else if(!this.state.hasImage)
         {
@@ -94,7 +94,7 @@ export default class Card extends React.Component {
     render() {
         return(
             <div key={this.props.item.key} className="card" onClick={() => { if(this.props.item.onListItemClicked) {this.props.item.onListItemClicked(this.props.item.uid);}}}>
-                <div className="card">
+                <div className="card" style={{height: '290px', overflow: 'hidden', backgroundColor: '#e1e1e1'}}>
                     { this.renderImage() }
                 </div>
                 <div className="content">
