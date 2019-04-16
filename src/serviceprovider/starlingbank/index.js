@@ -1,11 +1,11 @@
 import axios from 'axios';
-import { accessToken } from '../../constants/starlingConstants'
+import { accessToken, WEEKLY_ROUNDUP_COOKIE_NAME } from '../../constants/starlingConstants'
 import uuid from 'uuid';
+import moment from 'moment';
 
 /**
  * Provide a strict interface to Starling APIs.
  * as per spec, does not use oAuth
- * @param {api version} version
  * @returns {Object} an object with function calls that return promises when called
  * @example starling('v1').fetch('customers').then(() => {alert('done!')})
  */
@@ -38,6 +38,19 @@ const starling = () => {
         transfer: (accountUID, savingsGoalUID, body) => {
             const transferUID = uuid.v4();
             return axios.put(`${apiPath}/v2/account/${accountUID}/savings-goals/${savingsGoalUID}/add-money/${transferUID}`, body, configOptions);
+        },
+        setCookie: () => {
+            //set cookie to expire at end of week, must be in utc format
+            const expires = moment().utc().endOf('week');
+            document.cookie = `${WEEKLY_ROUNDUP_COOKIE_NAME}=true; expires=${expires}`;
+
+        },
+        hasCookie: () => {
+            const cookieData = document.cookie.split(";");
+            return cookieData.find(cookieKeyValue => {
+                const cookieParts = cookieKeyValue.split("=");
+                return (cookieParts[0] === WEEKLY_ROUNDUP_COOKIE_NAME && cookieParts[1] === "true")
+            });
         }
     }
 }

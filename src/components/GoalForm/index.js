@@ -27,13 +27,12 @@ class GoalForm extends React.Component{
         if(event.target.files[0])
         {
             const reader = new FileReader();
-            let base64 = '';
             reader.onloadend = () => {
                 if(reader.result)
                 {
-                    debugger;
-                    console.log(reader.result)
+                    //take dataurl and remove data part leaving you with base64 part
                     scope.setState({
+                        // @ts-ignore
                         base64: reader.result.split(',')[1]
                     });
                 }

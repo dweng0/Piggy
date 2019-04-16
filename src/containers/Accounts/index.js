@@ -98,6 +98,8 @@ class Accounts extends Component {
       starling().transfer(this.state.account.accountUid, savingsGoal.savingsGoalUid, body).then(
         response => {
           this.getGoals();
+          //set up a cookie that expires at the end of week
+          starling().setCookie();
           this.setState({
             attemptingTransaction: false,
             savingsSaved: true
