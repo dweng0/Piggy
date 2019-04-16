@@ -5,7 +5,14 @@ export default {
     },
     splash: {
         welcome: "Welcome to Piggy!",
-        subTitle: "Start saving"
+        subTitle: "Start saving",
+        description: "Roundup your weekly transactions",
+        alreadySaved: "Looks like you've already saved this week"
+    },
+    success: {
+        welcome: "Nice one",
+        subTitle: "You've made a nice saving this week, come back next week for more awesome",
+        button: "Thanks"
     },
     header: {
         greet: "Welcome",

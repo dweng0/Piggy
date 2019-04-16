@@ -41,7 +41,7 @@ class Accounts extends Component {
    */
   renderDetails = () => {
     let detailContent;
-    if(!this.props.saving)
+    if(!this.props.saving || starling().hasCookie())
     {
       return <Redirect to="/"/>
     } 
@@ -97,9 +97,6 @@ class Accounts extends Component {
   
       starling().transfer(this.state.account.accountUid, savingsGoal.savingsGoalUid, body).then(
         response => {
-          this.getGoals();
-          //set up a cookie that expires at the end of week
-          starling().setCookie();
           this.setState({
             attemptingTransaction: false,
             savingsSaved: true
@@ -192,6 +189,13 @@ class Accounts extends Component {
 
   componentDidMount() {
     this.getGoals();
+  }
+
+  componentDidUpdate() {
+    if(this.state.savingsSaved)
+    {
+      return <Redirect to="/success"/>
+    }
   }
 
   renderAccountsArea = () => {

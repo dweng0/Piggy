@@ -36,7 +36,7 @@ class Header extends React.Component {
         else
         {
             let wording = `Hey ${this.state.name}`;
-            if(this.props.saving && this.props.saving.amount > 0)
+            if(this.props.saving && this.props.saving.amount > 0 && !starling().hasCookie())
             {
                 wording += `, lets save ${this.props.saving.label}`;
             }
