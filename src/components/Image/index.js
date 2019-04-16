@@ -23,15 +23,20 @@ export default class ImageComponent extends React.Component {
         {
             throw new Error(errors.reduce((prev, current) => {return prev + ", " + current}));
         }
-
         this.state.imageSource = this.props.src;
+    }
 
+    componentDidMount = () => {
         if(this.props.base64)
         {
-            // server saves just the base64 type (not data URI), so have to try and find the correct datatype on the frontend
+            /**
+             * Server saves only the base64 part of an image, this code attemps to add the data part to create a data URI string for use in displaying images
+             * loop over the array of data types, create a dataURI with the base64 and dataURI,
+             * create an image, check if it successfully loads, resolve, otherwise decrement the count and try the next data type. if the decrement counter reaches zero, reject
+             * @param {string} base64Part 
+             */
            const findCorrectImageDataType = (base64Part) => {
                 return  new Promise((resolve, reject) => {
-                    debugger;
                     const acceptableDataTypes = ['image/png', 'image/jpg', 'image/jpeg', 'image/svg'];
                     let imagesToLoad = acceptableDataTypes.length;
                     const imageLoadsCorrectly = (src) => {
@@ -70,13 +75,13 @@ export default class ImageComponent extends React.Component {
                 });
             })
         }
-    }
+    }   
 
     /**
      * Apply external css where applicable
      */
     getCss = () => {
-        let imageCss = "ui image";
+        let imageCss = "";
         if(this.props.className)
         {
             imageCss += " " + this.props.className;
@@ -97,8 +102,7 @@ export default class ImageComponent extends React.Component {
         return _.extend(defaultStyle, style);
     }
     
-    render(){
-        debugger;
+    render() {
         return (
             <img alt="" src={this.state.imageSource} className={this.getCss()} style={this.getStyle(this.props.style)} />
         );

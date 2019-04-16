@@ -23,3 +23,10 @@ body {
 .no-animation{
     animation: none!important;
 }
+
+.maintain-aspect{
+    width:290px;
+    height:290px;   
+    position: relative; 
+    overflow:hidden;
+}

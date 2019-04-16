@@ -11,7 +11,7 @@ export default {
     },
     success: {
         welcome: "Nice one",
-        subTitle: "You've made a nice saving this week, come back next week for more awesome",
+        subTitle: "You've made a nice saving this week, come back next take make more savings",
         button: "Thanks"
     },
     header: {
@@ -27,14 +27,14 @@ export default {
     accountContent: {
         successTitle: "Nice one",
         successContent: "We've added those savings for you",
-        loadingTitle: "grabbing your account",
+        loadingTitle: "Loading your account",
         loadingContent: "You're only a few steps away from stashing away that loose change",
         errorTitle: "There was an error",
         errorContent: "We were unable to process the request",
         loadedTitle: "Account loaded",
-        loadedContent: "Select a saving goal or create one",
+        loadedContent: "Select a saving goal to save your money into",
         noSavingGoal: "You have no saving goals",
-        noSavingGoalSummary: "Help reach your saving targets by creating a saving goal today"
+        noSavingGoalSummary: "Help reach your saving targets by creating a goal today"
     },
     transactionsText: {
         title : "Weekly round up",

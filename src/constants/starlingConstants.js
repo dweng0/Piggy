@@ -1,3 +1,3 @@
 export const serviceUrl = "https://api-sandbox.starlingbank.com/";
-export const accessToken = "3bihD7SgYStewKDMLWlxSPdKLNXabl51ubVUAfp7m7LvjaWttb6uiu1WGDZ20bgE";
+export const accessToken = "Fa83Xqqx4xdfsDfbbS8CRZyUfNfer6dgnfzJ5SymebMzbn5P21mEWtSwmJJmrKYk";
 export const WEEKLY_ROUNDUP_COOKIE_NAME = "weeklyRoundUp";

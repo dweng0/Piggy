@@ -9,10 +9,10 @@ import List from '../../components/List';
 import Loading from '../../components/Loading';
 import starling from '../../serviceprovider/starlingbank';
 import cardImage from '../../assets/images/accounts.svg';
-import loadingImage from '../../assets/images/loading.svg';
 import successImage from '../../assets/images/success.svg'
 import errorImage from '../../assets/images/warning.svg';
 import locale from '../../locale/default';
+import alertify from 'alertifyjs';
 
 const accountContent = locale.accountContent;
 const currencyFormat = locale.currency.format;
@@ -26,14 +26,22 @@ class Accounts extends Component {
     account:null,
     errors: false,
     savingsSaved: false,
-    savingGoals: []
+    savingGoals: [],
+    redirect: false
   }
 
   constructor(props) {
     super(props);
     //partial args on callback to provide starling interface without polluting List component
     this.afterGoalSelected = _.partial(this.afterGoalSelected, _, starling);
-    this.getGoals();
+    this.state.redirect = (!this.props.saving || starling().hasCookie());
+  }
+
+  componentDidMount() {
+    if(!this.state.redirect)
+    {
+      this.getGoals();
+    }
   }
 
   /**
@@ -41,12 +49,7 @@ class Accounts extends Component {
    */
   renderDetails = () => {
     let detailContent;
-    debugger;
-    if(!this.props.saving || starling().hasCookie())
-    {
-      return <Redirect to="/"/>
-    } 
-    else if(this.state.savingsSaved)
+    if(this.state.savingsSaved)
     {
       detailContent = {
         imgSrc: successImage,
@@ -57,7 +60,7 @@ class Accounts extends Component {
     else
     {
       detailContent = {
-        imgSrc: loadingImage,
+        imgSrc: cardImage,
         title: accountContent.loadingTitle,
         content: accountContent.loadingContent
       };
@@ -68,7 +71,7 @@ class Accounts extends Component {
         detailContent.title = accountContent.errorTitle;
         detailContent.content = accountContent.errorContent;
       }
-      else if(this.state.loading)
+      else if(!this.state.loading)
       {
         detailContent.imgSrc = cardImage;
         detailContent.title = accountContent.loadedTitle;
@@ -98,14 +101,14 @@ class Accounts extends Component {
           minorUnits: Math.floor(this.props.saving.amount * 100) //move decimal along two places
         }
       };
-  
+      
       starling().transfer(this.state.account.accountUid, savingsGoal.savingsGoalUid, body).then(
         response => {
           this.setState({
             attemptingTransaction: false,
             savingsSaved: true
           });
-          
+          alertify.success('Transfer successful');
         }
       ).catch(
         (err) => {
@@ -216,6 +219,7 @@ class Accounts extends Component {
         );
       }
       let savingViewData = this.state.savingGoals.map(goal => {
+        console.log(`goal id is ${goal.savingsGoalUid}`);
         return {
           accountuid: this.state.account.accountUid,
           uid: goal.savingsGoalUid,
@@ -271,8 +275,8 @@ class Accounts extends Component {
     if(!_.isEmpty(newGoal))
     {
       starling().createGoal(this.state.account.accountUid, newGoal)
-        .then(() =>{ this.getGoals(); this.loadCreateForm();})
-        .catch(this.loadCreateForm(true));
+        .then(() =>{ this.getGoals(); this.loadCreateForm(); alertify.success('Saving goal created'); })
+        .catch(() => { this.loadCreateForm(true); alertify.error('Failed to create goal'); });
     }
   }
 
@@ -282,7 +286,6 @@ class Accounts extends Component {
    * make sure saving is in minor unit format (no decimals)
    */
   loadCreateForm = (errors) => {
-    debugger;
     if(errors)
     {
       return (
@@ -309,13 +312,20 @@ class Accounts extends Component {
   }
 
   render() {
-    return (
-      <div>
-        {this.renderDetails()}
-        {this.renderAccountsArea()}
-        {this.loadCreateForm()}
-      </div>
-    );
+    if(this.state.redirect)
+    {
+      return <Redirect to="/"/>
+    }
+    else
+    {
+      return (
+        <div>
+          {this.renderDetails()}
+          {this.renderAccountsArea()}
+          {this.loadCreateForm()}
+        </div>
+      );
+    }    
   }
 }
 

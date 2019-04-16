@@ -24,7 +24,7 @@ export default class Splash extends Component {
             <div>
               <p>{splashContent.alreadySaved}</p>
             </div>
-            <Image src={logo} size="large" className="bounce forever"/>
+            <Image src={logo} size="large" className="ui image bounce forever"/>
         </div>
         
         
@@ -36,7 +36,7 @@ export default class Splash extends Component {
         <div>
           <p>{splashContent.description}</p>
           <Link to="/weekly">
-              <Image src={logo} size="large" className="animated pulse"/>
+              <Image src={logo} size="large" className="ui image animated pulse"/>
               <button className="massive basic teal ui button">{splashContent.subTitle}</button>
           </Link>
         </div>

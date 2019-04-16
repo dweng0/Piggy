@@ -52,9 +52,9 @@ export default class Card extends React.Component {
     }
 
     componentDidMount() {
+        debugger;
         starling().getSavingPhoto(this.props.item.accountuid, this.props.item.uid)
             .then(response => {
-                debugger;
                 this.setState({
                     image64: response.data.base64EncodedPhoto,
                     imageLoaded: true
@@ -71,7 +71,8 @@ export default class Card extends React.Component {
     renderImage = () => {
         if(this.state.imageLoaded)
         {
-            return <Image src={this.state.image64} size="medium" base64="true" stye={{height: '100%'}} />
+            debugger;
+            return <Image src={this.state.image64} base64="true" style={{position: 'absolute', height: '100%'}} />
         }
         else if(!this.state.hasImage)
         {
@@ -95,7 +96,9 @@ export default class Card extends React.Component {
         return(
             <div key={this.props.item.key} className="card" onClick={() => { if(this.props.item.onListItemClicked) {this.props.item.onListItemClicked(this.props.item.uid);}}}>
                 <div className="card" style={{height: '290px', overflow: 'hidden', backgroundColor: '#e1e1e1'}}>
-                    { this.renderImage() }
+                    <div className="maintain-aspect">
+                        { this.renderImage() }
+                    </div>
                 </div>
                 <div className="content">
                     <div className="header">{this.props.item.title}</div>

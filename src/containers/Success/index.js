@@ -23,7 +23,7 @@ class Success extends Component {
         <header className="App-header">
         <h1 className="white text center" style={{marginTop:'20px'}}>{successContent.welcome}</h1>
            
-                <Image src={successImage} size="large" className="bounce"/>
+                <Image src={successImage} size="large" className="ui image bounce"/>
                 <p>{successContent.subTitle}</p>
                 <a className="massive teal ui button" href="https://www.starlingbank.com/">
                     {successContent.button}

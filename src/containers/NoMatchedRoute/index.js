@@ -14,7 +14,7 @@ const NoMatchedRoute = (props) => {
         <header className="App-header">
         <h1 className="white text center" style={{marginTop:'20px'}}>404</h1>
            
-                <Image src={image} size="medium" className="circular"/>
+                <Image src={image} size="medium" className="ui image"/>
                 <p>{notFoundContent.missing}</p>
                 <Link to="/">
                     <button className="massive teal ui button">{notFoundContent.returnButton}</button>
