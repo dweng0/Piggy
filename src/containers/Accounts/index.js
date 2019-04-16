@@ -27,7 +27,8 @@ class Accounts extends Component {
     errors: false,
     savingsSaved: false,
     savingGoals: [],
-    redirect: false
+    redirect: false,
+    creatingGoal: false
   }
 
   constructor(props) {
@@ -84,7 +85,7 @@ class Accounts extends Component {
   /**
    * After the user has selected a goal, we attempt to transact the amount to the selected goal
    */
-  afterGoalSelected = (goalUID, starling) => { 
+  afterGoalSelected = (goalUID, starling) => {
     this.setState({
       attemptingTransaction: true
     });
@@ -92,7 +93,7 @@ class Accounts extends Component {
     const savingsGoal = this.state.savingGoals.find(goal => {
       return goal.savingsGoalUid === goalUID;
     });
-    
+
     if(!_.isUndefined(savingsGoal))
     {
       const body = {
@@ -101,7 +102,7 @@ class Accounts extends Component {
           minorUnits: Math.floor(this.props.saving.amount * 100) //move decimal along two places
         }
       };
-      
+
       starling().transfer(this.state.account.accountUid, savingsGoal.savingsGoalUid, body).then(
         response => {
           this.setState({
@@ -125,7 +126,7 @@ class Accounts extends Component {
         errors: true,
         loading: false
       });
-    }    
+    }
   }
 
   /**
@@ -146,7 +147,7 @@ class Accounts extends Component {
                   case 200:
                   case 404:
                   {
-                    
+
                     this.setState({
                       loading: false,
                       account:  response.data.accounts[0],
@@ -274,18 +275,22 @@ class Accounts extends Component {
   afterGoalSubmit = (newGoal) => {
     if(!_.isEmpty(newGoal))
     {
+        this.setState({
+            creatingGoal: true
+        });
       starling().createGoal(this.state.account.accountUid, newGoal)
-        .then(() =>{ this.getGoals(); this.loadCreateForm(); alertify.success('Saving goal created'); })
-        .catch(() => { this.loadCreateForm(true); alertify.error('Failed to create goal'); });
+        .then(() =>{ this.getGoals(); this.loadCreateForm(); alertify.success('Saving goal created'); this.setState({creatingGoal: false}) })
+        .catch(() => { this.loadCreateForm(true); alertify.error('Failed to create goal'); this.setState({creatingGoal: false}) });
     }
   }
 
   /**
-   * PUT the data to the api, 
-   * Make sure goal exists, 
+   * PUT the data to the api,
+   * Make sure goal exists,
    * make sure saving is in minor unit format (no decimals)
    */
   loadCreateForm = (errors) => {
+      debugger;
     if(errors)
     {
       return (
@@ -303,6 +308,10 @@ class Accounts extends Component {
           <GoalForm afterGoalSubmit={this.afterGoalSubmit}/>
         </div>
       );
+    }
+    else if (this.creatingGoal)
+    {
+        return <Loading />
     }
     else
     {
@@ -325,7 +334,7 @@ class Accounts extends Component {
           {this.loadCreateForm()}
         </div>
       );
-    }    
+    }
   }
 }
 

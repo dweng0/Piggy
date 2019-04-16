@@ -1,24 +1,6 @@
-h1, h2, h3, a, p span {
-  font-family: 'Tahoma';
-  font-size: 1.4em;
-  letter-spacing: 1.8px;
-  word-spacing: 1.8px;
-  color: #625E5E;
-  font-weight: 400;
-  text-decoration: none;
-  font-style: normal;
-  font-variant: normal;
-  text-transform: none;
-  }
-  h1 {
-      font-size: 1.8em;
-  }
-  h2 {
-      font-size: 1.6em;
-  }
+
 body {
     color: #625e5e;
-    font-size: 1.6em;
 }
 .no-animation{
     animation: none!important;
@@ -26,7 +8,16 @@ body {
 
 .maintain-aspect{
     width:290px;
-    height:290px;   
-    position: relative; 
+    height:290px;
+    position: relative;
     overflow:hidden;
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
 }

@@ -33,7 +33,7 @@ export default class ImageComponent extends React.Component {
              * Server saves only the base64 part of an image, this code attemps to add the data part to create a data URI string for use in displaying images
              * loop over the array of data types, create a dataURI with the base64 and dataURI,
              * create an image, check if it successfully loads, resolve, otherwise decrement the count and try the next data type. if the decrement counter reaches zero, reject
-             * @param {string} base64Part 
+             * @param {string} base64Part
              */
            const findCorrectImageDataType = (base64Part) => {
                 return  new Promise((resolve, reject) => {
@@ -53,7 +53,7 @@ export default class ImageComponent extends React.Component {
                             }
                             if(imagesToLoad === 0)
                             {
-                                return reject("No acceptable data types found found");
+                                return reject("No acceptable data types found");
                             }
                         }
                     }
@@ -75,7 +75,7 @@ export default class ImageComponent extends React.Component {
                 });
             })
         }
-    }   
+    }
 
     /**
      * Apply external css where applicable
@@ -101,7 +101,7 @@ export default class ImageComponent extends React.Component {
 
         return _.extend(defaultStyle, style);
     }
-    
+
     render() {
         return (
             <img alt="" src={this.state.imageSource} className={this.getCss()} style={this.getStyle(this.props.style)} />

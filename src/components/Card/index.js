@@ -1,5 +1,6 @@
 import React from 'react';
 import _ from 'underscore';
+import uuid from 'uuid';
 
 import Image from '../Image';
 import starling from '../../serviceprovider/starlingbank';
@@ -21,7 +22,7 @@ export default class Card extends React.Component {
         {
             errors.push("No item provided for card");
         }
-        else 
+        else
         {
             if (!props.item.content)
             {
@@ -93,8 +94,9 @@ export default class Card extends React.Component {
     }
 
     render() {
+        const key = this.props.item.key + uuid.v4();
         return(
-            <div key={this.props.item.key} className="card" onClick={() => { if(this.props.item.onListItemClicked) {this.props.item.onListItemClicked(this.props.item.uid);}}}>
+            <div key={key} className="card" onClick={() => { if(this.props.item.onListItemClicked) {this.props.item.onListItemClicked(this.props.item.uid);}}}>
                 <div className="card" style={{height: '290px', overflow: 'hidden', backgroundColor: '#e1e1e1'}}>
                     <div className="maintain-aspect">
                         { this.renderImage() }
