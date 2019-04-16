@@ -20,3 +20,6 @@ body {
     color: #625e5e;
     font-size: 1.6em;
 }
+.no-animation{
+    animation: none!important;
+}

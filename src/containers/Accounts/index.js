@@ -216,6 +216,7 @@ class Accounts extends Component {
       }
       let savingViewData = this.state.savingGoals.map(goal => {
         return {
+          accountuid: this.state.account.accountUid,
           uid: goal.savingsGoalUid,
           title: goal.name,
           content: contentJSX(goal),
