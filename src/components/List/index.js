@@ -1,6 +1,8 @@
 import React from 'react';
 import _ from 'underscore';
 
+import Card from '../Card';
+
 /**
 * Display a nice list for our application, the array should contain:
 * the array item should be {title, content, src, randomImage}
@@ -16,25 +18,10 @@ const List = (props) => {
 
     const renderItems = (items) => {
         return items.map((item, index) => {
-            return (
-                    <div key={index} className="card" onClick={() => { if(props.onListItemClicked) {props.onListItemClicked(item.savingsGoalUid);}}}>
-                        <div className="card">
-                        </div>
-                        <div className="content">
-                            <div className="header">{item.title}</div>
-                            <div className="description">
-                                {item.content}
-                            </div>                          
-                        </div>
-                        <div className="ui bottom attached button">
-                            <i className="add icon"></i>
-                            Add saving to this goal
-                        </div>
-                    </div>
-            );
+            return <Card item={item} key={index}/>
         });
     }
-    return (        
+    return (
         <div className="ui link cards" style={{'paddingTop': '35px'}}>
             {renderItems(props.items)}
         </div>

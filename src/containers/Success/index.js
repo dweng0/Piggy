@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
+import { roundUpAmountCalculated } from '../../actions';
 import starling from '../../serviceprovider/starlingbank';
 import Image from '../../components/Image';
 import successImage from '../../assets/images/success.jpg';
 import content from '../../locale/default';
 import '../Splash/splash.css';
+
 const successContent = content.success;
 
-export default class Success extends Component {
-  constructor(props) {
-    super(props);
+class Success extends Component {
+  componentDidMount() {
     if(!starling().hasCookie())
     {
       starling().setCookie();
     }
+    this.props.roundUpAmountCalculated(null);
   }
   render() {
     return (
@@ -31,3 +33,9 @@ export default class Success extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return state;
+}
+
+export default connect(mapStateToProps, {roundUpAmountCalculated})(Success);

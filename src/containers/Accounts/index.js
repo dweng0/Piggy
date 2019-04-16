@@ -12,11 +12,10 @@ import cardImage from '../../assets/images/accounts.svg';
 import loadingImage from '../../assets/images/loading.svg';
 import successImage from '../../assets/images/success.svg'
 import errorImage from '../../assets/images/warning.svg';
-import content from '../../locale/default';
+import locale from '../../locale/default';
 
-
-const accountContent = content.accountContent;
-const currencyFormat = content.currency.format;
+const accountContent = locale.accountContent;
+const currencyFormat = locale.currency.format;
 
 /**
  * Load user accounts so that they can pick one to put savings into
@@ -34,10 +33,11 @@ class Accounts extends Component {
     super(props);
     //partial args on callback to provide starling interface without polluting List component
     this.afterGoalSelected = _.partial(this.afterGoalSelected, _, starling);
+    this.getGoals();
   }
 
   /**
-   * state should really be one 'switchable' string value here
+   * Render the page details depending on state.... state should really be one 'switchable' string value here
    */
   renderDetails = () => {
     let detailContent;
@@ -45,7 +45,7 @@ class Accounts extends Component {
     {
       return <Redirect to="/"/>
     } 
-      else if(this.state.savingsSaved)
+    else if(this.state.savingsSaved)
     {
       detailContent = {
         imgSrc: successImage,
@@ -77,6 +77,9 @@ class Accounts extends Component {
     return <Details cardImage={detailContent.imgSrc} title={detailContent.title} content={detailContent.content} />
   }
 
+  /**
+   * After the user has selected a goal, we attempt to transact the amount to the selected goal
+   */
   afterGoalSelected = (goalUID, starling) => { 
     this.setState({
       attemptingTransaction: true
@@ -90,7 +93,7 @@ class Accounts extends Component {
     {
       const body = {
         amount: {
-          currency: content.currency.short,
+          currency: locale.currency.short,
           minorUnits: Math.floor(this.props.saving.amount * 100) //move decimal along two places
         }
       };
@@ -100,7 +103,8 @@ class Accounts extends Component {
           this.setState({
             attemptingTransaction: false,
             savingsSaved: true
-          });          
+          });
+          
         }
       ).catch(
         (err) => {
@@ -120,14 +124,16 @@ class Accounts extends Component {
     }    
   }
 
+  /**
+   * Get all goals that belong to said account for this user
+   */
   getGoals = () =>{
-
     this.setState({savingsSaved: false});
     starling().accounts()
       .then((response) => {
         if(response.status === 200)
         {
-          //accounts comes back as an array indicating more than one, however v1 comes back as an object
+          //accounts comes back as an array indicating more than one, however v1 comes back as an object and brief implies one account will come back
           starling().savingGoals(response.data.accounts[0].accountUid)
             .then((goalResponse) =>{
 
@@ -136,6 +142,7 @@ class Accounts extends Component {
                   case 200:
                   case 404:
                   {
+                    
                     this.setState({
                       loading: false,
                       account:  response.data.accounts[0],
@@ -187,18 +194,12 @@ class Accounts extends Component {
       );
   }
 
-  componentDidMount() {
-    this.getGoals();
-  }
-
-  componentDidUpdate() {
+  renderAccountsArea = () => {
     if(this.state.savingsSaved)
     {
       return <Redirect to="/success"/>
     }
-  }
 
-  renderAccountsArea = () => {
     if(!this.state.loading && !this.state.errors && !_.isEmpty(this.state.savingGoals))
     {
       const contentJSX = (goal) => {
@@ -215,16 +216,17 @@ class Accounts extends Component {
       }
       let savingViewData = this.state.savingGoals.map(goal => {
         return {
-          savingsGoalUid: goal.savingsGoalUid,
+          uid: goal.savingsGoalUid,
           title: goal.name,
           content: contentJSX(goal),
-         
+          addItemText: "Add saving to this goal",
+          onListItemClicked: (selectedData)=> { this.afterGoalSelected(selectedData); }
         }
       });
       return (
         <div className="ui two column centered grid">
           <div className="column">
-                <List items={savingViewData} onListItemClicked={(selectedData)=> { this.afterGoalSelected(selectedData); }} />
+                <List items={savingViewData}/>
           </div>
         </div>
       );
@@ -249,9 +251,20 @@ class Accounts extends Component {
         </div>
       );
     }
-    return <div style={{minHeight: '477px'}}><Loading/></div>
+    return (
+      <div className="row" style={{ paddingTop: '50px', minHeight: '400px' }}>
+        <div className="ui two column centered grid">
+            <div className="column">
+              <Loading/>
+            </div>
+        </div>
+      </div>
+    );
   }
 
+  /**
+  * called when a user  creates a new goal, returning the new goal data, by this point it has not been sent to starling.
+  */
   afterGoalSubmit = (newGoal) => {
     if(!_.isEmpty(newGoal))
     {

@@ -32,6 +32,10 @@ const starling = () => {
         savingGoals:(accountUID) => {
             return axios.get(`${apiPath}/v2/account/${accountUID}/savings-goals`, configOptions);
         },
+        getSavingPhoto: (accountUID, savingsGoalUid) => {
+            // /api/v2/account/{accountUid}/savings-goals/{savingsGoalUid}/photo
+            return  axios.get(`${apiPath}/v2/account/${accountUID}/savings-goals/${savingsGoalUid}/photo`, configOptions);
+        },
         createGoal:(accountUID, body) => {
             return axios.put(`${apiPath}/v2/account/${accountUID}/savings-goals`, body, configOptions);
         },
