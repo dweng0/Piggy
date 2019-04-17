@@ -5,6 +5,9 @@ import Image from '../Image';
 import starling from '../../serviceprovider/starlingbank';
 import '../../index.css';
 
+/**
+ * Card component for individual item view, will error without complete item object
+ */
 export default class Card extends React.Component {
     state = {
         imageLoaded: false,

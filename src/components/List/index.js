@@ -4,10 +4,8 @@ import _ from 'underscore';
 import Card from '../Card';
 
 /**
-* Display a nice list for our application, the array should contain:
-* the array item should be {title, content, src, randomImage}
+* Display a list for our application, array of items must be provided
 * @param {Object} props contains array of items to Display
-*
 */
 const List = (props) => {
     

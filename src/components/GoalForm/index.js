@@ -4,6 +4,7 @@ import content from '../../locale/default';
 const goalContent = content.saveGoal;
 
 /**
+ * Renders the saving goal creation form
  * HTML5 validation:
  * min max (max is MAX_SAFE_INTEGER)
  * pattern match to only allow whole numbers, no decimals

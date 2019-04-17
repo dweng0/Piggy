@@ -1,8 +1,11 @@
 import React from 'react';
 import _ from 'underscore';
 
+const ACCEPTABLE_DATA_TYPES = ['image/png', 'image/jpg', 'image/jpeg', 'image/svg'];
+
 /**
- * Render image component for other components and the application in general
+ * Render image component for other components and the application in general.
+ * Will attemp to load a raw base64 string as an image using common acceptable datatypes
  * @returns {class}
  */
 export default class ImageComponent extends React.Component {
@@ -37,8 +40,8 @@ export default class ImageComponent extends React.Component {
              */
            const findCorrectImageDataType = (base64Part) => {
                 return  new Promise((resolve, reject) => {
-                    const acceptableDataTypes = ['image/png', 'image/jpg', 'image/jpeg', 'image/svg'];
-                    let imagesToLoad = acceptableDataTypes.length;
+                    
+                    let imagesToLoad = ACCEPTABLE_DATA_TYPES.length;
                     const imageLoadsCorrectly = (src) => {
                         let image = new Image();
                         image.src = src;
@@ -57,7 +60,7 @@ export default class ImageComponent extends React.Component {
                             }
                         }
                     }
-                    _.each(acceptableDataTypes, function(type) {
+                    _.each(ACCEPTABLE_DATA_TYPES, function(type) {
                         imageLoadsCorrectly(`data:${type};base64,${base64Part}`);
                     });
                 });
@@ -94,6 +97,9 @@ export default class ImageComponent extends React.Component {
         return imageCss;
     }
 
+    /**
+     * Apply external style, where applicable
+     */
     getStyle = (style) => {
         let defaultStyle = {
             margin: 'auto'

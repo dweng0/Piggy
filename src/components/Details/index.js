@@ -2,6 +2,10 @@ import React from 'react';
 import Image from '../Image';
 import _ from 'underscore';
 
+/**
+ * Functional component providing an image, title and content area for all pages
+ * @param {object} props 
+ */
 const Details = (props) => {
     let errors = [];
     if(!props.title)

@@ -7,7 +7,7 @@
 - User lands on splash screen, selects button 'start saving' ```/splash```
 - App works out how much user can save ```/weekly```
 - Results is displayed to user
-- User is asked to choose (or create a savings goal) ```accounts```
+- User is asked to choose (or create a savings goal) ```/accounts```
 - user selects savings goal
 - Transaction occurs
 - User is taken to success screen
