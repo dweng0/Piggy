@@ -4,7 +4,7 @@ import _ from 'underscore';
 import Card from '../Card';
 
 /**
-* Display a list for our application, array of items must be provided
+* Display a list of saving goals to the user, depends on Card component
 * @param {Object} props contains array of items to Display
 */
 const List = (props) => {

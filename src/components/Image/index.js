@@ -5,7 +5,7 @@ const ACCEPTABLE_DATA_TYPES = ['image/png', 'image/jpg', 'image/jpeg', 'image/sv
 
 /**
  * Render image component for other components and the application in general.
- * Will attemp to load a raw base64 string as an image using common acceptable datatypes
+ * Will attempt to load a raw base64 string as an image using common acceptable datatypes
  * @returns {class}
  */
 export default class ImageComponent extends React.Component {

@@ -15,10 +15,16 @@
 - attemps to round up this weeks transactions again are prevented if this cookie is present
 
 
+
 All images source from the open source website [pixabay](https://pixabay.com)
 ## Available Scripts
 
 In the project directory, you can run:
+
+## `npx styleguidist serve` 
+
+will render the component documentation. Building will miss the CDN semantic css files
+
 
 ### `npm start`
 

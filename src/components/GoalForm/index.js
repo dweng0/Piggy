@@ -95,6 +95,7 @@ class GoalForm extends React.Component{
                                         pattern="[A-Za-z0-9 ]+"
                                         title={goalContent.name.validation}
                                         name="name"
+                                        autoComplete="false"
                                         placeholder={goalContent.name.placeHolder}
                                         value={this.state.name}
                                         onChange={e => { this.setState({name: e.target.value})}}

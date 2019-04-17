@@ -1,11 +1,23 @@
 ```js
-<Loading />
+ <div className="row" style={{ padding: '175px' }}>
+    <div className="ui two column centered grid">
+        <div className="column">
+            <Loading/>
+        </div>
+    </div>
+</div>
 ```
 
-You can add a custom props to an example wrapper:
+Component will try to grab the whole screen if its not wrapped in a container
 
 ```jsx 
-<Loading />
+<div className="row" style={{ padding: '175px' }}>
+    <div className="ui two column centered grid">
+        <div className="column">
+            <Loading/>
+        </div>
+    </div>
+</div>
 ```
 
 ```jsx static

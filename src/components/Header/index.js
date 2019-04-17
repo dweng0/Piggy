@@ -7,7 +7,7 @@ import starling from '../../serviceprovider/starlingbank';
 
 const headerContent = content.header;
 /**
- * The Header component exists throughout the life time of the application and provides user details
+ * The Header component sits at the top of the application and connects to the service to get the users' name
  */
 class Header extends React.Component {
     state = {

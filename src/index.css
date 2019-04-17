@@ -1,6 +1,7 @@
 
 body {
     color: #625e5e;
+    font-size: 1.4em;
 }
 .no-animation{
     animation: none!important;

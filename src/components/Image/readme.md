@@ -1,15 +1,20 @@
 ```js
-<Image size="tiny" src="./src/logo.svg" className="avatar" />
+
+import successImage from '../../assets/images/success.jpg';
+import ImageComponent from './index';
+<ImageComponent src={successImage} size="large" className="ui image bounce forever"/>
+
 ```
 
 You can add a custom props:
 
 ```jsx static
  const props = {
-    className: "this will be appended to the css",
+    className: "ui image bounce" ,
     src: "this is required, the component will throw without this prop",
-    size: "uses semantic-ui size classes to determine image size"
+    size: "uses semantic-ui size classes to determine image size",
+    base64: true //optional, if set will attempt to load byte64 images into the correct dataType
  }
-
+<Image src={successImage} size="large" className="ui image bounce forever"/>
 ```
 

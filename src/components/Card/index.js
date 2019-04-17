@@ -6,7 +6,8 @@ import starling from '../../serviceprovider/starlingbank';
 import '../../index.css';
 
 /**
- * Card component for individual item view, will error without complete item object
+ * Card component for a saving goal resource, will error without expected props
+ * see styleguidist for more details
  */
 export default class Card extends React.Component {
     state = {
