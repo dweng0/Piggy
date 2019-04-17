@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Detail from './index';
+import 'jest'
 
 describe("Positive and negative testing", () =>{
   it('should throw with no props', () => {

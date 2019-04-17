@@ -11,7 +11,7 @@ export default {
     },
     success: {
         welcome: "Nice one",
-        subTitle: "You've made a nice saving this week, come back next take make more savings",
+        subTitle: "You've made a nice saving this week, come back next week to make more savings",
         button: "Thanks"
     },
     header: {

@@ -24,12 +24,13 @@ describe("Positive and negative testing", () =>{
   it('Should render when given an array of items', () => {
     let items = [];
     items.push({
+      uid:1,
       title: "test",
       content: "test"
     });
     const list = shallow(<List items={items} />);
 
-    expect(list.exists('.card')).toBe(true);
+    expect(list.exists('.cards')).toBe(true);
   })
  });
  
