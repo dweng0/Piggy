@@ -23,7 +23,8 @@ In the project directory, you can run:
 ### `npm start`
 
 Runs the app in development mode.<br>
-On [http://localhost:3000](http://localhost:3000)
+On [http://localhost:3000](http://localhost:3000)<br>
+dev mode is already proxied
 
 ### `npm test`
 
@@ -31,4 +32,5 @@ Launches the test runner in the interactive watch mode.<br>
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.
+Builds the app for production to the `build` folder.<br>
+Your choice of server will need to proxy  `/api` to `https://api-sandbox.starlingbank.com`
