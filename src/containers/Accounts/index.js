@@ -147,7 +147,6 @@ class Accounts extends Component {
                   case 200:
                   case 404:
                   {
-
                     this.setState({
                       loading: false,
                       account:  response.data.accounts[0],
@@ -220,7 +219,6 @@ class Accounts extends Component {
         );
       }
       let savingViewData = this.state.savingGoals.map(goal => {
-        console.log(`goal id is ${goal.savingsGoalUid}`);
         return {
           accountuid: this.state.account.accountUid,
           uid: goal.savingsGoalUid,
@@ -233,7 +231,7 @@ class Accounts extends Component {
       return (
         <div className="ui two column centered grid">
           <div className="column">
-                <List items={savingViewData}/>
+              <List items={savingViewData}/>
           </div>
         </div>
       );
@@ -290,7 +288,6 @@ class Accounts extends Component {
    * make sure saving is in minor unit format (no decimals)
    */
   loadCreateForm = (errors) => {
-      debugger;
     if(errors)
     {
       return (
@@ -309,9 +306,17 @@ class Accounts extends Component {
         </div>
       );
     }
-    else if (this.creatingGoal)
+    else if (this.state.creatingGoal)
     {
-        return <Loading />
+      return (
+        <div className="row" style={{ padding: '175px' }}>
+            <div className="ui two column centered grid">
+                <div className="column">
+                    <Loading/>
+                </div>
+            </div>
+          </div>
+      );
     }
     else
     {

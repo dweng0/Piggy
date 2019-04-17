@@ -17,8 +17,8 @@ const List = (props) => {
     }
 
     const renderItems = (items) => {
-        return items.map((item, index) => {
-            return <Card item={item} key={index}/>
+        return items.map((item) => {
+            return <Card item={item} key={item.uid}/>
         });
     }
     return (

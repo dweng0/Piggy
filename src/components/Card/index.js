@@ -1,10 +1,8 @@
 import React from 'react';
 import _ from 'underscore';
-import uuid from 'uuid';
 
 import Image from '../Image';
 import starling from '../../serviceprovider/starlingbank';
-
 import '../../index.css';
 
 export default class Card extends React.Component {
@@ -53,7 +51,10 @@ export default class Card extends React.Component {
     }
 
     componentDidMount() {
-        debugger;
+        this.setState({
+            imageLoaded: false,
+            image64: ""
+        })
         starling().getSavingPhoto(this.props.item.accountuid, this.props.item.uid)
             .then(response => {
                 this.setState({
@@ -72,7 +73,6 @@ export default class Card extends React.Component {
     renderImage = () => {
         if(this.state.imageLoaded)
         {
-            debugger;
             return <Image src={this.state.image64} base64="true" style={{position: 'absolute', height: '100%'}} />
         }
         else if(!this.state.hasImage)
@@ -94,9 +94,8 @@ export default class Card extends React.Component {
     }
 
     render() {
-        const key = this.props.item.key + uuid.v4();
         return(
-            <div key={key} className="card" onClick={() => { if(this.props.item.onListItemClicked) {this.props.item.onListItemClicked(this.props.item.uid);}}}>
+            <div className="card" onClick={() => { if(this.props.item.onListItemClicked) {this.props.item.onListItemClicked(this.props.item.uid);}}}>
                 <div className="card" style={{height: '290px', overflow: 'hidden', backgroundColor: '#e1e1e1'}}>
                     <div className="maintain-aspect">
                         { this.renderImage() }

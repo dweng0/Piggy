@@ -12,7 +12,8 @@ class GoalForm extends React.Component{
 
     state = {
         name: '',
-        amount: 0
+        amount: 0,
+        uploadFileText: content.saveGoal.file.label
     }
 
     constructor(props) {
@@ -26,6 +27,7 @@ class GoalForm extends React.Component{
     convertFile = (event, scope) => {
         if(event.target.files[0])
         {
+            this.setState({uploadFileText: goalContent.file.uploadingPicture});
             const reader = new FileReader();
             reader.onloadend = () => {
                 if(reader.result)
@@ -33,7 +35,8 @@ class GoalForm extends React.Component{
                     //take dataurl and remove data part leaving you with base64 part
                     scope.setState({
                         // @ts-ignore
-                        base64: reader.result.split(',')[1]
+                        base64: reader.result.split(',')[1],
+                        uploadFileText: goalContent.file.uploadSuccess
                     });
                 }
             }
@@ -66,35 +69,21 @@ class GoalForm extends React.Component{
                                Create a new goal
                             </h2>
                             <form className="ui fluid form" onSubmit={(e) => {this.handleGoalSubmit(e);}}>
-                            <div className="ui middle aligned center aligned grid container">
-                                <div className="ui fluid segment">
-                                    <input type="file" className="inputfile" id="embedpollfileinput" />
-
-                                <label for="embedpollfileinput" className="ui huge red right floated button">
-                                    <i className="ui upload icon"></i>
-                                    Upload image
-                                </label>
-                                        <input type="file" className="inputfile" id="embedpollfileinput" />
-
-                                <label for="embedpollfileinput" className="ui huge green right floated button">
-                                    <i className="ui upload icon"></i>
-                                    Upload image
-                                </label>
-                                </div>
-
-                            </div>
+                           
                                 <div className="field">
-                                    <label>
-                                    {goalContent.file.label}
-                                    </label>
-
                                     <input
+                                        id="embedpollfileinput"
                                         type="file"
                                         name="file"
                                         accept=".png, .jpg"
+                                        className= "inputfile"
                                         placeholder="pick a file to upload"
                                         onChange={e => { this.convertFile(e, this);}}
                                         />
+                                    <label htmlFor="embedpollfileinput" className="ui massive left floated teal button white text" style={{textDecoration: 'none', color: 'white'}}>
+                                        <i className="ui upload icon"></i>
+                                        {goalContent.file.label}
+                                    </label>
                                 </div>
                                 <div className="field">
                                     <label>

@@ -53,7 +53,9 @@ export default {
             validation: "Alphanumeric characters only"
         },
         file: {
-            label: "Add a picture to your goal"
+            label: "Add a picture to your goal",
+            uploadingPicture: "Uploading picture",
+            uploadSuccess: "Picture uploaded"
         },
         amount: {
             placeHolder: "Amount",
