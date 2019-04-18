@@ -14,8 +14,6 @@
 - cookie is set which expires at end of week
 - attemps to round up this weeks transactions again are prevented if this cookie is present
 
-
-
 All images source from the open source website [pixabay](https://pixabay.com)
 ## Available Scripts
 
