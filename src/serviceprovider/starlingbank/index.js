@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { accessToken, WEEKLY_ROUNDUP_COOKIE_NAME } from '../../constants/starlingConstants'
+import { accessToken, WEEKLY_ROUNDUP_COOKIE_NAME } from '../../constants/Starling'
 import uuid from 'uuid';
 import moment from 'moment';
 

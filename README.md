@@ -2,6 +2,10 @@
 [View Project Progress](https://github.com/dweng0/Piggy/projects/1) <br/>
 ![Super Pig](./src/logo.svg)
 
+## Updating the acces token
+
+The access token can be found in `constants/starling`
+
 ## User journey
 
 - User lands on splash screen, selects button 'start saving' ```/splash```
@@ -22,7 +26,6 @@ In the project directory, you can run:
 ## `npx styleguidist serve` 
 
 will render the component documentation. Building will miss the CDN semantic css files
-
 
 ### `npm start`
 
