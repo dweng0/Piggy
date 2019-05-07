@@ -1,8 +1,14 @@
 # Project Piggy!
+This app rounds up all your weekly transactions and puts the difference into a savings goal of your choice.
+
+Uses Starling banks' API.
+
 [View Project Progress](https://github.com/dweng0/Piggy/projects/1) <br/>
 ![Super Pig](./src/logo.svg)
 
 ## Updating the acces token
+
+This component focuses on the transaction round up, thus no oAuth has been implemented. It uses starlings' access token interface for development purposes.
 
 The access token can be found in `constants/starling`
 
