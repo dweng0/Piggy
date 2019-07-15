@@ -29,7 +29,7 @@ All images source from the open source website [pixabay](https://pixabay.com)
 
 In the project directory, you can run:
 
-## `npx styleguidist serve` 
+## `npx styleguidist serve`
 
 will render the component documentation. Building will miss the CDN semantic css files
 
@@ -47,3 +47,14 @@ Launches the test runner in the interactive watch mode.<br>
 
 Builds the app for production to the `build` folder.<br>
 Your choice of server will need to proxy  `/api` to `https://api-sandbox.starlingbank.com`
+
+
+Notes<br/>
+
+add the following to line 127 of ```react-scripts/config/webpack.config.js```
+```json
+devServer: {
+    disableHostCheck: true
+  },
+
+```
