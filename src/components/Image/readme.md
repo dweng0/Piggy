@@ -5,7 +5,7 @@ import ImageComponent from './index';
 <ImageComponent src={successImage} size="large" className="ui image bounce forever"/>
 
 ```
-
+# todo add bounce and other things as options
 You can add a custom props:
 
 ```jsx static
